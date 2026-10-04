@@ -1,0 +1,185 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "flight": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.5",
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            "math.sin(query.anim_time * 180) * 2.5"
+          ]
+        },
+        "tail": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 - 45) * 8",
+            0,
+            "math.sin(query.anim_time * 180) * 6"
+          ]
+        },
+        "ribbon_-1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180) * 10",
+            0,
+            0
+          ]
+        },
+        "ribbon_1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 + 70) * 10",
+            0,
+            0
+          ]
+        },
+        "wisp_0": {
+          "position": [
+            "math.sin(query.anim_time * 150) * 4.5",
+            "math.cos(query.anim_time * 120) * 1.2",
+            "math.cos(query.anim_time * 150) * 4.5"
+          ]
+        },
+        "wisp_1": {
+          "position": [
+            "-math.sin(query.anim_time * 150 + 90) * 4.8",
+            "math.sin(query.anim_time * 140) * 1.0",
+            "-math.cos(query.anim_time * 150 + 90) * 4.8"
+          ]
+        },
+        "halo": {
+          "rotation": [
+            0,
+            "query.anim_time * 45",
+            0
+          ]
+        }
+      }
+    },
+    "idle": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.5",
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            "math.sin(query.anim_time * 180) * 2.5"
+          ]
+        },
+        "tail": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 - 45) * 8",
+            0,
+            "math.sin(query.anim_time * 180) * 6"
+          ]
+        },
+        "ribbon_-1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180) * 10",
+            0,
+            0
+          ]
+        },
+        "ribbon_1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 + 70) * 10",
+            0,
+            0
+          ]
+        },
+        "wisp_0": {
+          "position": [
+            "math.sin(query.anim_time * 150) * 4.5",
+            "math.cos(query.anim_time * 120) * 1.2",
+            "math.cos(query.anim_time * 150) * 4.5"
+          ]
+        },
+        "wisp_1": {
+          "position": [
+            "-math.sin(query.anim_time * 150 + 90) * 4.8",
+            "math.sin(query.anim_time * 140) * 1.0",
+            "-math.cos(query.anim_time * 150 + 90) * 4.8"
+          ]
+        },
+        "halo": {
+          "rotation": [
+            0,
+            "query.anim_time * 45",
+            0
+          ]
+        }
+      }
+    },
+    "accelerate": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.5",
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            "math.sin(query.anim_time * 180) * 2.5"
+          ]
+        },
+        "tail": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 - 45) * 8",
+            0,
+            "math.sin(query.anim_time * 180) * 6"
+          ]
+        },
+        "ribbon_-1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180) * 10",
+            0,
+            0
+          ]
+        },
+        "ribbon_1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 + 70) * 10",
+            0,
+            0
+          ]
+        },
+        "wisp_0": {
+          "position": [
+            "math.sin(query.anim_time * 150) * 4.5",
+            "math.cos(query.anim_time * 120) * 1.2",
+            "math.cos(query.anim_time * 150) * 4.5"
+          ]
+        },
+        "wisp_1": {
+          "position": [
+            "-math.sin(query.anim_time * 150 + 90) * 4.8",
+            "math.sin(query.anim_time * 140) * 1.0",
+            "-math.cos(query.anim_time * 150 + 90) * 4.8"
+          ]
+        },
+        "halo": {
+          "rotation": [
+            0,
+            "query.anim_time * 45",
+            0
+          ]
+        }
+      }
+    }
+  }
+}

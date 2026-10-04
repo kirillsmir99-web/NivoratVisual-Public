@@ -1,0 +1,8 @@
+{
+  "schemaVersion": 1,
+  "id": "nv-tests",
+  "version": "1.0.0",
+  "environment": "client",
+  "mixins": ["nv-tests.mixins.json"],
+  "entrypoints": { "fabric-client-gametest": ["rtx.nv.test.VisualClientTest", "rtx.nv.test.RenderBenchmarkTest"] }
+}

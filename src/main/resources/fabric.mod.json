@@ -1,0 +1,45 @@
+{
+  "schemaVersion": 1,
+  "id": "nv",
+  "version": "${version}",
+  "name": "Nivorat Visual",
+  "description": "Nivorat Visual (NV): лучший визуальный клиент для Minecraft 1.21.11. Векторный интерфейс, MSDF-шрифты, шейдеры Kawase и расширенная кастомизация.",
+  "authors": [
+    "Nivorat"
+  ],
+  "contact": {
+    "homepage": "https://t.me/virionDEV",
+    "sources": "https://github.com/kirillsmir99-web/NivoratVisual-Public"
+  },
+  "license": "CC0-1.0",
+  "icon": "assets/nv/logo.png",
+  "environment": "client",
+  "entrypoints": {
+    "client": [
+      "rtx.nv.NV"
+    ],
+    "main": [
+      "rtx.nv.NV"
+    ]
+  },
+  "mixins": [
+    "nv.mixins.json"
+  ],
+  "accessWidener": "nv.accesswidener",
+  "depends": {
+    "fabricloader": ">=0.19.3",
+    "minecraft": "1.21.11",
+    "java": ">=21",
+    "fabric-api": "*"
+  },
+  "custom": {
+    "modmenu": {
+      "badges": [
+        "client"
+      ],
+      "links": {
+        "modmenu.discord": "https://t.me/virionDEV"
+      }
+    }
+  }
+}

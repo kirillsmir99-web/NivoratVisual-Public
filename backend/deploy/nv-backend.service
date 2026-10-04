@@ -1,0 +1,29 @@
+[Unit]
+Description=NV social service (IRC, Party, presence and cosmetic sync)
+After=network.target
+
+[Service]
+Type=simple
+User=nv-social
+Group=nv-social
+WorkingDirectory=/opt/nv-backend
+ExecStart=/opt/nv-backend/venv/bin/python3 /opt/nv-backend/server.py
+Environment=NV_DB=/var/lib/nv-backend/nv-social.sqlite3
+Environment=NV_PORT=8080
+StateDirectory=nv-backend
+StateDirectoryMode=0700
+UMask=0077
+Restart=on-failure
+RestartSec=5
+TimeoutStopSec=15
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/nv-backend
+LimitNOFILE=4096
+TasksMax=64
+MemoryMax=256M
+
+[Install]
+WantedBy=multi-user.target

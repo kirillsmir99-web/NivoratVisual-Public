@@ -1,0 +1,337 @@
+{
+  "pack": "NivoratClient icons",
+  "original_count": 28,
+  "original_directory": "nivoratclient-original",
+  "icons": [
+    {
+      "name": "modules",
+      "file": "svg/modules.svg",
+      "codepoint": "U+E001"
+    },
+    {
+      "name": "pinned",
+      "file": "svg/pinned.svg",
+      "codepoint": "U+E002"
+    },
+    {
+      "name": "visuals",
+      "file": "svg/visuals.svg",
+      "codepoint": "U+E003"
+    },
+    {
+      "name": "interface",
+      "file": "svg/interface.svg",
+      "codepoint": "U+E004"
+    },
+    {
+      "name": "utils",
+      "file": "svg/utils.svg",
+      "codepoint": "U+E005"
+    },
+    {
+      "name": "themes",
+      "file": "svg/themes.svg",
+      "codepoint": "U+E006"
+    },
+    {
+      "name": "search",
+      "file": "svg/search.svg",
+      "codepoint": "U+E007"
+    },
+    {
+      "name": "settings",
+      "file": "svg/settings.svg",
+      "codepoint": "U+E008"
+    },
+    {
+      "name": "language",
+      "file": "svg/language.svg",
+      "codepoint": "U+E009"
+    },
+    {
+      "name": "scale",
+      "file": "svg/scale.svg",
+      "codepoint": "U+E00A"
+    },
+    {
+      "name": "aspect-ratio",
+      "file": "svg/aspect-ratio.svg",
+      "codepoint": "U+E00B"
+    },
+    {
+      "name": "color",
+      "file": "svg/color.svg",
+      "codepoint": "U+E00C"
+    },
+    {
+      "name": "glow",
+      "file": "svg/glow.svg",
+      "codepoint": "U+E00D"
+    },
+    {
+      "name": "glass",
+      "file": "svg/glass.svg",
+      "codepoint": "U+E00E"
+    },
+    {
+      "name": "shards",
+      "file": "svg/shards.svg",
+      "codepoint": "U+E00F"
+    },
+    {
+      "name": "sound",
+      "file": "svg/sound.svg",
+      "codepoint": "U+E010"
+    },
+    {
+      "name": "volume",
+      "file": "svg/volume.svg",
+      "codepoint": "U+E011"
+    },
+    {
+      "name": "pitch",
+      "file": "svg/pitch.svg",
+      "codepoint": "U+E012"
+    },
+    {
+      "name": "bind",
+      "file": "svg/bind.svg",
+      "codepoint": "U+E013"
+    },
+    {
+      "name": "speed",
+      "file": "svg/speed.svg",
+      "codepoint": "U+E014"
+    },
+    {
+      "name": "animation",
+      "file": "svg/animation.svg",
+      "codepoint": "U+E015"
+    },
+    {
+      "name": "jump-circle",
+      "file": "svg/jump-circle.svg",
+      "codepoint": "U+E016"
+    },
+    {
+      "name": "music",
+      "file": "svg/music.svg",
+      "codepoint": "U+E017"
+    },
+    {
+      "name": "cooldowns",
+      "file": "svg/cooldowns.svg",
+      "codepoint": "U+E018"
+    },
+    {
+      "name": "hotkeys",
+      "file": "svg/hotkeys.svg",
+      "codepoint": "U+E019"
+    },
+    {
+      "name": "potions",
+      "file": "svg/potions.svg",
+      "codepoint": "U+E01A"
+    },
+    {
+      "name": "arraylist",
+      "file": "svg/arraylist.svg",
+      "codepoint": "U+E01B"
+    },
+    {
+      "name": "add",
+      "file": "svg/add.svg",
+      "codepoint": "U+E01C"
+    },
+    {
+      "name": "delete",
+      "file": "svg/delete.svg",
+      "codepoint": "U+E01D"
+    },
+    {
+      "name": "duplicate",
+      "file": "svg/duplicate.svg",
+      "codepoint": "U+E01E"
+    },
+    {
+      "name": "import",
+      "file": "svg/import.svg",
+      "codepoint": "U+E01F"
+    },
+    {
+      "name": "export",
+      "file": "svg/export.svg",
+      "codepoint": "U+E020"
+    },
+    {
+      "name": "close",
+      "file": "svg/close.svg",
+      "codepoint": "U+E021"
+    },
+    {
+      "name": "back",
+      "file": "svg/back.svg",
+      "codepoint": "U+E022"
+    },
+    {
+      "name": "chevron-down",
+      "file": "svg/chevron-down.svg",
+      "codepoint": "U+E023"
+    },
+    {
+      "name": "check",
+      "file": "svg/check.svg",
+      "codepoint": "U+E024"
+    },
+    {
+      "name": "more",
+      "file": "svg/more.svg",
+      "codepoint": "U+E025"
+    },
+    {
+      "name": "heart",
+      "file": "svg/heart.svg",
+      "codepoint": "U+E026"
+    },
+    {
+      "name": "play",
+      "file": "svg/play.svg",
+      "codepoint": "U+E027"
+    },
+    {
+      "name": "pause",
+      "file": "svg/pause.svg",
+      "codepoint": "U+E028"
+    },
+    {
+      "name": "previous",
+      "file": "svg/previous.svg",
+      "codepoint": "U+E029"
+    },
+    {
+      "name": "next",
+      "file": "svg/next.svg",
+      "codepoint": "U+E02A"
+    },
+    {
+      "name": "profile",
+      "file": "svg/profile.svg",
+      "codepoint": "U+E02B"
+    },
+    {
+      "name": "edge-fringe",
+      "file": "svg/edge-fringe.svg",
+      "codepoint": "U+E02C"
+    },
+    {
+      "name": "crown",
+      "file": "svg/crown.svg",
+      "codepoint": "U+E02D"
+    },
+    {
+      "name": "pet",
+      "file": "svg/pet.svg",
+      "codepoint": "U+E02E"
+    },
+    {
+      "name": "pickaxe",
+      "file": "svg/pickaxe.svg",
+      "codepoint": "U+E02F"
+    },
+    {
+      "name": "chevron-right",
+      "file": "svg/chevron-right.svg",
+      "codepoint": "U+E030"
+    },
+    {
+      "name": "copy",
+      "file": "svg/copy.svg",
+      "codepoint": "U+E031"
+    },
+    {
+      "name": "discord",
+      "file": "svg/discord.svg",
+      "codepoint": "U+E032"
+    },
+    {
+      "name": "donate",
+      "file": "svg/donate.svg",
+      "codepoint": "U+E033"
+    },
+    {
+      "name": "external",
+      "file": "svg/external.svg",
+      "codepoint": "U+E034"
+    },
+    {
+      "name": "font",
+      "file": "svg/font.svg",
+      "codepoint": "U+E035"
+    },
+    {
+      "name": "info",
+      "file": "svg/info.svg",
+      "codepoint": "U+E036"
+    },
+    {
+      "name": "keybind",
+      "file": "svg/keybind.svg",
+      "codepoint": "U+E037"
+    },
+    {
+      "name": "maximize",
+      "file": "svg/maximize.svg",
+      "codepoint": "U+E038"
+    },
+    {
+      "name": "pin",
+      "file": "svg/pin.svg",
+      "codepoint": "U+E039"
+    },
+    {
+      "name": "refresh",
+      "file": "svg/refresh.svg",
+      "codepoint": "U+E03A"
+    },
+    {
+      "name": "reset",
+      "file": "svg/reset.svg",
+      "codepoint": "U+E03B"
+    },
+    {
+      "name": "restore",
+      "file": "svg/restore.svg",
+      "codepoint": "U+E03C"
+    },
+    {
+      "name": "save",
+      "file": "svg/save.svg",
+      "codepoint": "U+E03D"
+    },
+    {
+      "name": "telegram",
+      "file": "svg/telegram.svg",
+      "codepoint": "U+E03E"
+    },
+    {
+      "name": "tiktok",
+      "file": "svg/tiktok.svg",
+      "codepoint": "U+E03F"
+    },
+    {
+      "name": "trash",
+      "file": "svg/trash.svg",
+      "codepoint": "U+E040"
+    },
+    {
+      "name": "warning",
+      "file": "svg/warning.svg",
+      "codepoint": "U+E041"
+    },
+    {
+      "name": "youtube",
+      "file": "svg/youtube.svg",
+      "codepoint": "U+E042"
+    }
+  ]
+}

@@ -1,0 +1,284 @@
+#version 150
+
+in vec2 FragCoord;
+flat in int QuadIndex;
+
+uniform sampler2D Sampler0;
+
+layout(std140) uniform RadialGlassParamsArray {
+    vec4 params[480];
+};
+
+layout(std140) uniform PaletteParams {
+    vec4 paletteMeta;
+    vec4 paletteColors[6];
+    vec4 paletteMeta2;
+    vec4 paletteLayerA[6];
+    vec4 paletteWaveA;
+    vec4 paletteWave2;
+    vec4 paletteLayerB[6];
+    vec4 paletteWaveB;
+    vec4 palettePadB;
+    vec4 paletteLayerC[6];
+    vec4 paletteWaveC;
+    vec4 palettePadC;
+    vec4 paletteLayerD[6];
+    vec4 paletteWaveD;
+    vec4 palettePadD;
+    vec4 paletteLayerE[6];
+    vec4 paletteWaveE;
+    vec4 palettePadE;
+    vec4 paletteLayerF[6];
+    vec4 paletteWaveF;
+    vec4 palettePadF;
+};
+
+out vec4 OutColor;
+
+float kLayerA = 0.0;
+float kLayerB = 0.0;
+float kLayerC = 0.0;
+float kLayerD = 0.0;
+float kLayerE = 0.0;
+float kLayerF = 0.0;
+
+float themeLayerCoverage(vec4 wave, vec2 fragXY) {
+    if (wave.w < 0.5) {
+        return 0.0;
+    }
+    if (wave.w > 1.5) {
+        return clamp(wave.z, 0.0, 1.0);
+    }
+    vec2 res = max(paletteWave2.xy, vec2(1.0));
+    float aspect = res.x / res.y;
+    vec2 d = (fragXY / res - wave.xy) * vec2(aspect, 1.0);
+    float wf = max(paletteWave2.z, 0.0005);
+    return 1.0 - smoothstep(wave.z - wf, wave.z + wf, length(d));
+}
+
+void themeWaveMix(vec2 fragXY) {
+    kLayerA = themeLayerCoverage(paletteWaveA, fragXY);
+    kLayerB = themeLayerCoverage(paletteWaveB, fragXY);
+    kLayerC = themeLayerCoverage(paletteWaveC, fragXY);
+    kLayerD = themeLayerCoverage(paletteWaveD, fragXY);
+    kLayerE = themeLayerCoverage(paletteWaveE, fragXY);
+    kLayerF = themeLayerCoverage(paletteWaveF, fragXY);
+}
+
+vec3 themeBlend(vec3 base, vec3 a, vec3 b, vec3 c, vec3 d, vec3 e, vec3 f) {
+    vec3 r = mix(base, a, kLayerA);
+    r = mix(r, b, kLayerB);
+    r = mix(r, c, kLayerC);
+    r = mix(r, d, kLayerD);
+    r = mix(r, e, kLayerE);
+    return mix(r, f, kLayerF);
+}
+
+vec3 paletteColorAt(int idx) {
+    if (idx <= 0) return themeBlend(paletteColors[0].rgb, paletteLayerA[0].rgb, paletteLayerB[0].rgb, paletteLayerC[0].rgb, paletteLayerD[0].rgb, paletteLayerE[0].rgb, paletteLayerF[0].rgb);
+    if (idx == 1) return themeBlend(paletteColors[1].rgb, paletteLayerA[1].rgb, paletteLayerB[1].rgb, paletteLayerC[1].rgb, paletteLayerD[1].rgb, paletteLayerE[1].rgb, paletteLayerF[1].rgb);
+    if (idx == 2) return themeBlend(paletteColors[2].rgb, paletteLayerA[2].rgb, paletteLayerB[2].rgb, paletteLayerC[2].rgb, paletteLayerD[2].rgb, paletteLayerE[2].rgb, paletteLayerF[2].rgb);
+    if (idx == 3) return themeBlend(paletteColors[3].rgb, paletteLayerA[3].rgb, paletteLayerB[3].rgb, paletteLayerC[3].rgb, paletteLayerD[3].rgb, paletteLayerE[3].rgb, paletteLayerF[3].rgb);
+    if (idx == 4) return themeBlend(paletteColors[4].rgb, paletteLayerA[4].rgb, paletteLayerB[4].rgb, paletteLayerC[4].rgb, paletteLayerD[4].rgb, paletteLayerE[4].rgb, paletteLayerF[4].rgb);
+    return themeBlend(paletteColors[5].rgb, paletteLayerA[5].rgb, paletteLayerB[5].rgb, paletteLayerC[5].rgb, paletteLayerD[5].rgb, paletteLayerE[5].rgb, paletteLayerF[5].rgb);
+}
+
+vec3 paletteRamp(float t) {
+    int count = int(paletteMeta.x + 0.5);
+    if (count <= 1) {
+        return paletteColorAt(0);
+    }
+    float f = clamp(t, 0.0, 1.0) * float(count - 1);
+    int i = clamp(int(floor(f)), 0, count - 1);
+    int j = min(i + 1, count - 1);
+    float frac = clamp(f - float(i), 0.0, 1.0);
+    frac = frac * frac * (3.0 - 2.0 * frac);
+    return mix(paletteColorAt(i), paletteColorAt(j), frac);
+}
+
+vec3 paletteLoop(float t) {
+    int count = int(paletteMeta.x + 0.5);
+    if (count <= 1) {
+        return paletteColorAt(0);
+    }
+
+    float f = fract(t) * float(count);
+    int i1 = clamp(int(floor(f)), 0, count - 1);
+    float u = clamp(f - float(i1), 0.0, 1.0);
+
+    int i0 = i1 - 1; if (i0 < 0) i0 += count;
+    int i2 = i1 + 1; if (i2 >= count) i2 -= count;
+    int i3 = i1 + 2; if (i3 >= count) i3 -= count;
+
+    vec3 c0 = paletteColorAt(i0);
+    vec3 c1 = paletteColorAt(i1);
+    vec3 c2 = paletteColorAt(i2);
+    vec3 c3 = paletteColorAt(i3);
+
+    float u2 = u * u;
+    float u3 = u2 * u;
+    vec3 cyclicCol = 0.5 * ((2.0 * c1)
+                      + (-c0 + c2) * u
+                      + (2.0 * c0 - 5.0 * c1 + 4.0 * c2 - c3) * u2
+                      + (-c0 + 3.0 * c1 - 3.0 * c2 + c3) * u3);
+
+    float tri = 0.5 - 0.5 * cos(6.2831853 * fract(t));
+    vec3 mirrorCol = paletteRamp(tri);
+
+    float closed = clamp(paletteMeta2.y, 0.0, 1.0);
+    return clamp(mix(mirrorCol, cyclicCol, closed), 0.0, 1.0);
+}
+
+vec3 boxGradient(vec2 uv, float phase) {
+    vec3 tl = paletteLoop(phase);
+    vec3 tr = paletteLoop(phase + 0.25);
+    vec3 br = paletteLoop(phase + 0.5);
+    vec3 bl = paletteLoop(phase + 0.75);
+    vec3 top = mix(tl, tr, uv.x);
+    vec3 bot = mix(bl, br, uv.x);
+    return mix(top, bot, uv.y);
+}
+
+vec3 meshGradient(vec2 uv, float phase, float aspect) {
+    float a = 6.2831853 * phase;
+    vec3 sum = vec3(0.0);
+    float wsum = 0.0;
+    for (int i = 0; i < 6; i++) {
+        float fi = float(i);
+        float kx = mod(fi, 2.0) < 0.5 ? 1.0 : 2.0;
+        float ky = mod(fi, 2.0) < 0.5 ? 2.0 : 1.0;
+        vec2 pos = vec2(0.5) + 0.34 * vec2(sin(a * kx + fi * 2.3999), cos(a * ky - fi * 1.618));
+        vec2 d = (uv - pos) * vec2(aspect, 1.0);
+        float w = 1.0 / (dot(d, d) * 5.0 + 0.06);
+        sum += paletteRamp(fi / 5.0) * w;
+        wsum += w;
+    }
+    return sum / wsum;
+}
+
+vec3 selectStyle(float id, vec3 ramp, vec3 mesh, vec3 box) {
+    int s = int(id + 0.5);
+    if (s == 1) return mesh;
+    if (s == 2) return box;
+    return ramp;
+}
+
+void main() {
+    themeWaveMix(gl_FragCoord.xy);
+
+    int base = QuadIndex * 10;
+    vec4 shape = params[base];
+    vec4 style = params[base + 1];
+    vec4 alphaPowerMix = params[base + 2];
+    vec4 fresnelColor = params[base + 3];
+    vec4 flagsDistortZ = params[base + 4];
+    vec4 primaryColor = params[base + 5];
+    vec4 secondaryColor = params[base + 6];
+    vec4 reg = params[base + 7];
+    vec4 highlightColor = params[base + 8];
+
+    float outerRadius = shape.x;
+    float innerRadius = shape.y;
+    float midAngle = shape.z;
+    float halfAngle = max(shape.w, 0.001);
+
+    float extent = max(style.x, 1.0);
+    float corner = max(style.y, 0.0);
+    float feather = max(style.z, 0.2);
+    float highlight = clamp(style.w, 0.0, 1.0);
+
+    float globalAlpha = clamp(alphaPowerMix.x, 0.0, 1.0);
+    float fresnelPower = max(alphaPowerMix.y, 0.001);
+    float baseAlpha = clamp(alphaPowerMix.z, 0.0, 1.0);
+    float fresnelMix = clamp(alphaPowerMix.w, 0.0, 1.0);
+    float fresnelInvert = flagsDistortZ.x;
+    float distortStrength = flagsDistortZ.y;
+    float colorOffset = flagsDistortZ.w;
+
+    vec2 coord = clamp(FragCoord, vec2(0.0), vec2(1.0));
+    vec2 size = vec2(extent * 2.0);
+    vec2 local = (coord - vec2(0.5)) * size;
+    vec2 p = vec2(local.x, -local.y);
+
+    float ca = cos(midAngle);
+    float sa = sin(midAngle);
+    vec2 q = vec2(p.x * ca - p.y * sa, p.x * sa + p.y * ca);
+
+    float radial = length(q);
+    float ringMid = (outerRadius + innerRadius) * 0.5;
+    float ringHalf = max((outerRadius - innerRadius) * 0.5, 0.001);
+    float ring = abs(radial - ringMid) - ringHalf;
+    float wedge = abs(q.x) * cos(halfAngle) - q.y * sin(halfAngle);
+
+    vec2 dd = vec2(ring + corner, wedge + corner);
+    float signedEdge = min(max(dd.x, dd.y), 0.0) + length(max(dd, vec2(0.0))) - corner;
+
+    float alpha = 1.0 - smoothstep(-feather, feather, signedEdge);
+    if (alpha <= 0.001) {
+        discard;
+    }
+
+    float arcHalf = max(ringMid * tan(min(halfAngle, 1.3)), 0.001);
+    float maxDistNorm = max(min(ringHalf, arcHalf), 0.001);
+    float edgeGradient = 1.0 - clamp(abs(signedEdge) / maxDistNorm, 0.0, 1.0);
+    float fresnelBase = (fresnelInvert > 0.5) ? edgeGradient : (1.0 - edgeGradient);
+
+    float fresnel;
+    if (fresnelPower > 20.0) {
+        fresnel = exp(fresnelPower * log(clamp(fresnelBase, 0.001, 1.0)));
+    } else {
+        fresnel = pow(clamp(fresnelBase, 0.0, 1.0), fresnelPower);
+    }
+    fresnel = clamp(fresnel, 0.0, 1.0);
+
+    vec2 sectorCenter = vec2(sa, -ca) * ringMid;
+    vec2 pos = sectorCenter - local;
+    vec2 dir = (length(pos) > 0.001) ? normalize(-pos) : vec2(0.0);
+
+    vec2 texCoord = clamp((gl_FragCoord.xy - reg.xy) / max(reg.zw, vec2(1.0)), vec2(0.0), vec2(1.0));
+    vec2 ofs = dir * fresnel * distortStrength;
+    vec2 sampleUv = clamp(texCoord + ofs, vec2(0.0), vec2(1.0));
+
+    vec2 caUv = ofs * 0.12;
+    vec3 refracted;
+    refracted.r = texture(Sampler0, clamp(sampleUv + caUv, vec2(0.0), vec2(1.0))).r;
+    refracted.g = texture(Sampler0, sampleUv).g;
+    refracted.b = texture(Sampler0, clamp(sampleUv - caUv, vec2(0.0), vec2(1.0))).b;
+
+    float along = clamp(0.5 + atan(q.x, q.y) / (2.0 * halfAngle), 0.0, 1.0);
+    float across = clamp((radial - innerRadius) / max(outerRadius - innerRadius, 0.001), 0.0, 1.0);
+    vec2 gradCoord = vec2(along, across);
+    float gradAspect = (2.0 * arcHalf) / max(outerRadius - innerRadius, 0.001);
+
+    vec3 mixedColor;
+    if (int(paletteMeta.x + 0.5) >= 2) {
+        float linearT = clamp(gradCoord.x + fract(colorOffset), 0.0, 1.0);
+        vec3 rampCol = paletteRamp(linearT);
+        vec3 meshCol = meshGradient(gradCoord, paletteMeta.y, gradAspect);
+        vec3 boxCol = boxGradient(gradCoord, paletteMeta.y);
+        mixedColor = selectStyle(paletteMeta.z, rampCol, meshCol, boxCol);
+    } else {
+        mixedColor = mix(primaryColor.rgb, secondaryColor.rgb, gradCoord.x * 0.5);
+    }
+
+    float noise = fract(sin(dot(coord * size, vec2(12.9898, 78.233))) * 43758.5453);
+    vec3 ditheredColor = mixedColor * (1.0 - (0.5 / 255.0) * noise) + (0.5 / 255.0) * noise;
+
+    float panelAlpha = mix(primaryColor.a, secondaryColor.a, 0.5);
+    vec3 dimmedBackdrop = refracted * 0.78;
+    vec3 tintedBackground = mix(dimmedBackdrop, ditheredColor, clamp(panelAlpha * 0.32, 0.0, 0.75));
+    vec3 finalColor = mix(tintedBackground, ditheredColor, fresnel * fresnelMix);
+
+    float edgeAlpha = max(fresnelColor.a, panelAlpha);
+    float finalAlpha = mix(baseAlpha, edgeAlpha, fresnel) * alpha * globalAlpha;
+
+    if (highlight > 0.001) {
+        finalColor = mix(finalColor, highlightColor.rgb, highlight * 0.55);
+    }
+
+    if (finalAlpha < 0.001) {
+        discard;
+    }
+
+    OutColor = vec4(finalColor, finalAlpha);
+}

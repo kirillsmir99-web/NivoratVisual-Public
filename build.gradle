@@ -1,0 +1,196 @@
+plugins {
+    id 'fabric-loom' version '1.17.19'
+    id 'maven-publish'
+}
+
+version = project.mod_version
+group = project.maven_group
+
+def nvEdition = providers.gradleProperty('nvEdition').getOrElse('free')
+if (!(nvEdition in ['free', 'pro'])) throw new GradleException('nvEdition must be free or pro')
+layout.buildDirectory = file("build/editions/${nvEdition}")
+tasks.withType(Jar).configureEach {
+    destinationDirectory = file('build/libs')
+}
+
+base {
+    archivesName = nvEdition == 'free' ? 'NivoratFreeVisual' : 'NivoratVisual'
+}
+
+tasks.named('processResources') {
+    inputs.property('nvEdition', nvEdition)
+    doFirst {
+        if (nvEdition == 'pro') {
+            def models = fileTree('src/main/resources/assets/nv/models/wings').matching { include '*.json' }.files.size()
+            def textures = fileTree('src/main/resources/assets/nv/textures/wings').matching { include '*.png' }.files.size()
+            if (models != 32 || textures != 32) throw new GradleException('Pro requires the separate cosmetic pack: 32 models and 32 textures')
+        }
+    }
+    if (nvEdition == 'free') {
+        exclude { element ->
+            def path = element.path.replace('\\', '/')
+            (path.startsWith('assets/nv/models/wings/') || path.startsWith('assets/nv/textures/wings/')) &&
+                !(element.name in ['crystal.json', 'crystal.png'])
+        }
+    }
+    doLast {
+        file("${destinationDir}/nv-edition.properties").text = "edition=${nvEdition}\n"
+        def metadata = file("${destinationDir}/fabric.mod.json")
+        def data = new groovy.json.JsonSlurper().parse(metadata)
+        data.name = nvEdition == 'free' ? 'NivoratFreeVisual' : 'NivoratVisual'
+        metadata.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(data))
+    }
+}
+
+repositories {
+    mavenCentral()
+    maven {
+        name = 'Fabric'
+        url = 'https://maven.fabricmc.net/'
+    }
+    maven {
+        name = 'TerraformersMC'
+        url = 'https://maven.terraformersmc.com/'
+    }
+    maven {
+        name = 'SpongePowered'
+        url = 'https://repo.spongepowered.org/repository/maven-public/'
+    }
+}
+
+loom {
+    accessWidenerPath = file("src/main/resources/nv.accesswidener")
+}
+
+// Client regression tests run in an isolated directory and are never included in the product jar.
+fabricApi {
+    configureTests {
+        createSourceSet = true
+        modId = "nv-tests"
+        enableGameTests = false
+        enableClientGameTests = true
+        clearRunDirectory = false
+        username = "NVAudit"
+    }
+}
+
+def nvTestSuite = providers.gradleProperty('nvTestSuite').getOrElse('visual')
+def nvSocialOffline = nvTestSuite != 'network'
+loom.runs.named('clientGameTest') {
+    vmArg "-Dnv.social.offline=${nvSocialOffline}"
+}
+tasks.named('processGametestResources') {
+    inputs.property('nvTestSuite', nvTestSuite)
+    doLast {
+        def metadata = file("${destinationDir}/fabric.mod.json")
+        def data = new groovy.json.JsonSlurper().parse(metadata)
+        def suites = [polish: ['rtx.nv.test.FunctionSweepClientTest'], product: ['rtx.nv.test.ProductClientTest'], visual: ['rtx.nv.test.VisualClientTest'], ux: ['rtx.nv.test.UxClientTest'], benchmark: ['rtx.nv.test.RenderBenchmarkTest'], network: ['rtx.nv.test.SocialNetworkTest']]
+        if (!suites.containsKey(nvTestSuite)) throw new GradleException("Unknown NV test suite: ${nvTestSuite}")
+        data.entrypoints['fabric-client-gametest'] = suites[nvTestSuite]
+        metadata.text = groovy.json.JsonOutput.prettyPrint(groovy.json.JsonOutput.toJson(data))
+    }
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+
+    // Fabric API
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    productionRuntimeMods "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+    productionRuntimeMods "net.fabricmc.fabric-api:fabric-client-gametest-api-v1:4.3.5+bfe9fcf43e"
+
+    // MixinExtras
+    compileOnly "io.github.llamalad7:mixinextras-common:0.5.3"
+    annotationProcessor "io.github.llamalad7:mixinextras-common:0.5.3"
+    implementation "io.github.llamalad7:mixinextras-fabric:0.5.3"
+    include "io.github.llamalad7:mixinextras-fabric:0.5.3"
+
+    // NightConfig (TOML & Core)
+    implementation "com.electronwill.night-config:core:3.8.3"
+    implementation "com.electronwill.night-config:toml:3.8.3"
+    include "com.electronwill.night-config:core:3.8.3"
+    include "com.electronwill.night-config:toml:3.8.3"
+
+    // Local libraries from libs/
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+}
+
+processResources {
+    exclude 'backup/**'
+    // Preserve local source assets; SF Pro is not redistributed in the product.
+    exclude 'assets/nv/fonts/sf-pro/**'
+    exclude 'assets/nv/fonts/monsterat/**'
+    exclude 'assets/nv/fonts/i2/**'
+    exclude 'assets/nv/fonts/icons/**'
+    exclude 'assets/nv/fonts/event-icons/**'
+    exclude 'assets/nv/fonts/inv-icons/**'
+    exclude 'assets/nv/fonts/heart/**'
+    exclude 'assets/nv/fonts/mainmenu/**'
+    exclude 'assets/nv/fonts/smallpixel/**'
+    exclude 'licenses/WaveyCapes.txt'
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') { expand(version: project.version) }
+}
+
+tasks.register('gametestJar', Jar) {
+    from sourceSets.gametest.output
+    archiveClassifier = 'gametest-dev'
+}
+
+tasks.register('remapGametestJar', net.fabricmc.loom.task.RemapJarTask) {
+    dependsOn tasks.named('gametestJar')
+    inputFile = tasks.named('gametestJar', Jar).flatMap { it.archiveFile }
+    archiveClassifier = 'gametest'
+    addNestedDependencies = false
+    classpath.from sourceSets.gametest.runtimeClasspath
+}
+
+tasks.register('runProductionClientGameTest', net.fabricmc.loom.task.prod.ClientProductionRunTask) {
+    mods.from tasks.named('remapJar').flatMap { it.archiveFile }
+    mods.from tasks.named('remapGametestJar').flatMap { it.archiveFile }
+    jvmArgs.add('-Dfabric.client.gametest')
+    jvmArgs.add("-Dnv.social.offline=${nvSocialOffline}")
+    jvmArgs.add('-Dnv.test.social.name=NVAuditProd')
+    jvmArgs.add("-Djava.io.tmpdir=${System.getProperty('java.io.tmpdir')}")
+    useXVFB = false
+    runDir = file("build/run/product-${nvEdition}-${nvTestSuite}")
+}
+
+tasks.withType(JavaCompile).configureEach {
+    it.options.release = 21
+    it.options.encoding = "UTF-8"
+    it.options.compilerArgs += ["-Xmaxerrs", "2000"]
+}
+
+java {
+    withSourcesJar()
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+tasks.named('sourcesJar') {
+    destinationDirectory = file('build/libs')
+    if (nvEdition == 'free') {
+        exclude { element ->
+            def path = element.path
+            (path.startsWith('assets/nv/models/wings/') || path.startsWith('assets/nv/textures/wings/')) &&
+                !(element.name in ['crystal.json', 'crystal.png'])
+        }
+    }
+    exclude 'backup/**'
+    exclude 'assets/nv/fonts/sf-pro/**'
+    exclude 'assets/nv/fonts/monsterat/**'
+    exclude 'assets/nv/fonts/i2/**'
+    exclude 'assets/nv/fonts/icons/**'
+    exclude 'assets/nv/fonts/event-icons/**'
+    exclude 'assets/nv/fonts/inv-icons/**'
+    exclude 'assets/nv/fonts/heart/**'
+    exclude 'assets/nv/fonts/mainmenu/**'
+    exclude 'assets/nv/fonts/smallpixel/**'
+    exclude 'licenses/WaveyCapes.txt'
+}
+
+tasks.named('remapJar') { destinationDirectory = file('build/libs') }
+

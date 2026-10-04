@@ -1,0 +1,128 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "flight": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.4",
+            0
+          ]
+        },
+        "wing_-1": {
+          "rotation": [
+            0,
+            "math.sin(query.anim_time * 720) * -34",
+            0
+          ]
+        },
+        "wing_1": {
+          "rotation": [
+            0,
+            "math.sin(query.anim_time * 720) * 34",
+            0
+          ]
+        },
+        "antenna_-1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180) * 6",
+            0,
+            0
+          ]
+        },
+        "antenna_1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 + 45) * 6",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "idle": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.4",
+            0
+          ]
+        },
+        "wing_-1": {
+          "rotation": [
+            0,
+            "math.sin(query.anim_time * 720) * -34",
+            0
+          ]
+        },
+        "wing_1": {
+          "rotation": [
+            0,
+            "math.sin(query.anim_time * 720) * 34",
+            0
+          ]
+        },
+        "antenna_-1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180) * 6",
+            0,
+            0
+          ]
+        },
+        "antenna_1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 + 45) * 6",
+            0,
+            0
+          ]
+        }
+      }
+    },
+    "accelerate": {
+      "loop": true,
+      "animation_length": 2,
+      "bones": {
+        "body": {
+          "position": [
+            0,
+            "math.sin(query.anim_time * 180) * 0.4",
+            0
+          ]
+        },
+        "wing_-1": {
+          "rotation": [
+            0,
+            "math.sin(query.anim_time * 720) * -34",
+            0
+          ]
+        },
+        "wing_1": {
+          "rotation": [
+            0,
+            "math.sin(query.anim_time * 720) * 34",
+            0
+          ]
+        },
+        "antenna_-1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180) * 6",
+            0,
+            0
+          ]
+        },
+        "antenna_1": {
+          "rotation": [
+            "math.sin(query.anim_time * 180 + 45) * 6",
+            0,
+            0
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,434 @@
+{
+    "bell": {
+        "sounds": [
+            "nv:hit_sounds/bell"
+        ]
+    },
+    "impulse": {
+        "sounds": [
+            "nv:hit_sounds/impulse"
+        ]
+    },
+    "pop": {
+        "sounds": [
+            "nv:hit_sounds/pop"
+        ]
+    },
+    "crystal": {
+        "sounds": [
+            "nv:hit_sounds/crystal"
+        ]
+    },
+    "rust": {
+        "sounds": [
+            "nv:hit_sounds/rust"
+        ]
+    },
+    "bubble": {
+        "sounds": [
+            "nv:hit_sounds/bubble"
+        ]
+    },
+    "click": {
+        "sounds": [
+            "nv:hit_sounds/click"
+        ]
+    },
+    "cod": {
+        "sounds": [
+            "nv:hit_sounds/cod"
+        ]
+    },
+    "welcome": {
+        "sounds": [
+            "nv:other/notification/notif"
+        ]
+    },
+    "notification": {
+        "sounds": [
+            "nv:other/notification/notif"
+        ]
+    },
+    "notification_low": {
+        "sounds": [
+            "nv:other/notification/low"
+        ]
+    },
+    "player_ping": {
+        "sounds": [
+            "nv:other/notification/playerping"
+        ]
+    },
+    "low": {
+        "sounds": [
+            "nv:other/notification/low"
+        ]
+    },
+    "notif": {
+        "sounds": [
+            "nv:other/notification/notif"
+        ]
+    },
+    "playerping": {
+        "sounds": [
+            "nv:other/notification/playerping"
+        ]
+    },
+    "command_error": {
+        "sounds": [
+            "nv:chat/command-error"
+        ]
+    },
+    "entity.ribbit.ambient": {
+        "sounds": [
+            "nv:entity/ribbit_ambient1",
+            "nv:entity/ribbit_ambient2",
+            "nv:entity/ribbit_ambient3",
+            "nv:entity/ribbit_ambient4",
+            "nv:entity/ribbit_ambient5"
+        ]
+    },
+    "entity.ribbit.step": {
+        "sounds": [
+            "nv:entity/ribbit_step1",
+            "nv:entity/ribbit_step2"
+        ]
+    },
+    "entity.ribbit.hurt": {
+        "sounds": [
+            "nv:entity/ribbit_hurt1",
+            "nv:entity/ribbit_hurt2",
+            "nv:entity/ribbit_hurt3"
+        ]
+    },
+    "entity.ribbit.death": {
+        "sounds": [
+            "nv:entity/ribbit_death1",
+            "nv:entity/ribbit_death2"
+        ]
+    },
+    "ribbit_ambient1": {
+        "sounds": [
+            "nv:entity/ribbit_ambient1"
+        ]
+    },
+    "ribbit_ambient2": {
+        "sounds": [
+            "nv:entity/ribbit_ambient2"
+        ]
+    },
+    "ribbit_ambient3": {
+        "sounds": [
+            "nv:entity/ribbit_ambient3"
+        ]
+    },
+    "ribbit_ambient4": {
+        "sounds": [
+            "nv:entity/ribbit_ambient4"
+        ]
+    },
+    "ribbit_ambient5": {
+        "sounds": [
+            "nv:entity/ribbit_ambient5"
+        ]
+    },
+    "ribbit_death1": {
+        "sounds": [
+            "nv:entity/ribbit_death1"
+        ]
+    },
+    "ribbit_death2": {
+        "sounds": [
+            "nv:entity/ribbit_death2"
+        ]
+    },
+    "ribbit_hurt1": {
+        "sounds": [
+            "nv:entity/ribbit_hurt1"
+        ]
+    },
+    "ribbit_hurt2": {
+        "sounds": [
+            "nv:entity/ribbit_hurt2"
+        ]
+    },
+    "ribbit_hurt3": {
+        "sounds": [
+            "nv:entity/ribbit_hurt3"
+        ]
+    },
+    "ribbit_step1": {
+        "sounds": [
+            "nv:entity/ribbit_step1"
+        ]
+    },
+    "ribbit_step2": {
+        "sounds": [
+            "nv:entity/ribbit_step2"
+        ]
+    },
+    "frag_effect_echo_main": {
+        "sounds": [
+            "nv:charmsfxpack/echocharmmain"
+        ]
+    },
+    "frag_effect_knock_main": {
+        "sounds": [
+            "nv:charmsfxpack/knockcharmmain"
+        ]
+    },
+    "frag_effect_pulse": {
+        "sounds": [
+            "nv:charmsfxpack/pulsecharmdistant0",
+            "nv:charmsfxpack/pulsecharmdistant1",
+            "nv:charmsfxpack/pulsecharmdistant2",
+            "nv:charmsfxpack/pulsecharmdistant3",
+            "nv:charmsfxpack/pulsecharmdistant4"
+        ]
+    },
+    "frag_effect_sparks_collision": {
+        "sounds": [
+            "nv:charmsfxpack/sparkscollisionneared"
+        ]
+    },
+    "launcher_open": {
+        "sounds": [
+            "nv:themes/launcher/open"
+        ]
+    },
+    "launcher_close": {
+        "sounds": [
+            "nv:themes/launcher/close"
+        ]
+    },
+    "launcher_toggle_on": {
+        "sounds": [
+            "nv:themes/launcher/toggle_on"
+        ]
+    },
+    "launcher_toggle_off": {
+        "sounds": [
+            "nv:themes/launcher/toggle_off"
+        ]
+    },
+    "launcher_slider": {
+        "sounds": [
+            "nv:themes/launcher/slider_tick"
+        ]
+    },
+    "launcher_category": {
+        "sounds": [
+            "nv:themes/launcher/category_expand"
+        ]
+    },
+    "launcher_button": {
+        "sounds": [
+            "nv:themes/launcher/button"
+        ]
+    },
+    "launcher_dropdown_open": {
+        "sounds": [
+            "nv:themes/launcher/dropdown_open"
+        ]
+    },
+    "launcher_dropdown_close": {
+        "sounds": [
+            "nv:themes/launcher/dropdown_close"
+        ]
+    },
+    "serene_open": {
+        "sounds": [
+            "nv:themes/serene/open"
+        ]
+    },
+    "serene_close": {
+        "sounds": [
+            "nv:themes/serene/close"
+        ]
+    },
+    "serene_toggle_on": {
+        "sounds": [
+            "nv:themes/serene/toggle_on"
+        ]
+    },
+    "serene_toggle_off": {
+        "sounds": [
+            "nv:themes/serene/toggle_off"
+        ]
+    },
+    "serene_slider": {
+        "sounds": [
+            "nv:themes/serene/slider_tick"
+        ]
+    },
+    "serene_category": {
+        "sounds": [
+            "nv:themes/serene/category_expand"
+        ]
+    },
+    "serene_button": {
+        "sounds": [
+            "nv:themes/serene/button_primary"
+        ]
+    },
+    "serene_pin": {
+        "sounds": [
+            "nv:themes/serene/pin"
+        ]
+    },
+    "serene_unpin": {
+        "sounds": [
+            "nv:themes/serene/unpin"
+        ]
+    },
+    "serene_dropdown_open": {
+        "sounds": [
+            "nv:themes/serene/dropdown_open"
+        ]
+    },
+    "serene_dropdown_close": {
+        "sounds": [
+            "nv:themes/serene/dropdown_close"
+        ]
+    },
+    "bubble_open": {
+        "sounds": [
+            "nv:themes/bubble/open"
+        ]
+    },
+    "bubble_close": {
+        "sounds": [
+            "nv:themes/bubble/close"
+        ]
+    },
+    "bubble_toggle_on": {
+        "sounds": [
+            "nv:themes/bubble/toggle_on"
+        ]
+    },
+    "bubble_toggle_off": {
+        "sounds": [
+            "nv:themes/bubble/toggle_off"
+        ]
+    },
+    "bubble_slider": {
+        "sounds": [
+            "nv:themes/bubble/slider_tick"
+        ]
+    },
+    "bubble_category": {
+        "sounds": [
+            "nv:themes/bubble/category_expand"
+        ]
+    },
+    "bubble_button": {
+        "sounds": [
+            "nv:themes/bubble/button"
+        ]
+    },
+    "cyber_open": {
+        "sounds": [
+            "nv:themes/cyber/open"
+        ]
+    },
+    "cyber_close": {
+        "sounds": [
+            "nv:themes/cyber/close"
+        ]
+    },
+    "cyber_toggle_on": {
+        "sounds": [
+            "nv:themes/cyber/toggle_on"
+        ]
+    },
+    "cyber_toggle_off": {
+        "sounds": [
+            "nv:themes/cyber/toggle_off"
+        ]
+    },
+    "cyber_slider": {
+        "sounds": [
+            "nv:themes/cyber/slider_tick"
+        ]
+    },
+    "cyber_category": {
+        "sounds": [
+            "nv:themes/cyber/category_expand"
+        ]
+    },
+    "cyber_button": {
+        "sounds": [
+            "nv:themes/cyber/button"
+        ]
+    },
+    "nv_glass_button": {
+        "sounds": [
+            "nv:nv_glass/button"
+        ]
+    },
+    "nv_glass_slider": {
+        "sounds": [
+            "nv:nv_glass/slider"
+        ]
+    },
+    "nv_glass_category": {
+        "sounds": [
+            "nv:nv_glass/category"
+        ]
+    },
+    "nv_glass_open": {
+        "sounds": [
+            "nv:nv_glass/open"
+        ]
+    },
+    "nv_glass_close": {
+        "sounds": [
+            "nv:nv_glass/close"
+        ]
+    },
+    "nv_glass_toggle_on": {
+        "sounds": [
+            "nv:nv_glass/toggle_on"
+        ]
+    },
+    "nv_glass_toggle_off": {
+        "sounds": [
+            "nv:nv_glass/toggle_off"
+        ]
+    },
+    "nv_glass_dropdown_open": {
+        "sounds": [
+            "nv:nv_glass/dropdown_open"
+        ]
+    },
+    "nv_glass_dropdown_close": {
+        "sounds": [
+            "nv:nv_glass/dropdown_close"
+        ]
+    },
+    "nv_glass_pin": {
+        "sounds": [
+            "nv:nv_glass/pin"
+        ]
+    },
+    "nv_glass_unpin": {
+        "sounds": [
+            "nv:nv_glass/unpin"
+        ]
+    },
+    "nv_tactical": {
+        "sounds": [
+            "nv:hit_sounds/nv_tactical"
+        ]
+    },
+    "nv_glass_error": {
+        "sounds": [
+            "nv:nv_glass/error"
+        ]
+    },
+    "nv_glass_notify": {
+        "sounds": [
+            "nv:nv_glass/notify"
+        ]
+    }
+}

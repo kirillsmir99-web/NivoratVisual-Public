@@ -1,0 +1,3515 @@
+{
+  "id": "sand",
+  "name": "Песчаные",
+  "texture_width": 64,
+  "texture_height": 64,
+  "total_texture_height": 64,
+  "offset": [
+    0.0,
+    1.5,
+    0.5
+  ],
+  "bones": [
+    {
+      "name": "all",
+      "parent": null,
+      "origin": [
+        0,
+        0,
+        0
+      ],
+      "rotation": [
+        0,
+        0,
+        0
+      ],
+      "is_left": false,
+      "is_right": false,
+      "cubes": [],
+      "children": [
+        {
+          "name": "wings_1",
+          "parent": "all",
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "is_left": false,
+          "is_right": false,
+          "cubes": [],
+          "children": [
+            {
+              "name": "bone",
+              "parent": "wings_1",
+              "origin": [
+                0.5,
+                1.5,
+                0.5
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [
+                {
+                  "name": "bone",
+                  "from": [
+                    0.5,
+                    1,
+                    0
+                  ],
+                  "to": [
+                    9.5,
+                    2,
+                    1.5
+                  ],
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation": null,
+                  "faces": {
+                    "north": [
+                      1,
+                      27,
+                      10,
+                      28
+                    ],
+                    "east": [
+                      0,
+                      27,
+                      1,
+                      28
+                    ],
+                    "south": [
+                      11,
+                      27,
+                      20,
+                      28
+                    ],
+                    "west": [
+                      10,
+                      27,
+                      11,
+                      28
+                    ],
+                    "up": [
+                      10,
+                      27,
+                      1,
+                      26
+                    ],
+                    "down": [
+                      19,
+                      26,
+                      10,
+                      27
+                    ]
+                  }
+                },
+                {
+                  "name": "bone",
+                  "from": [
+                    -0.5,
+                    -9,
+                    0.75
+                  ],
+                  "to": [
+                    14.5,
+                    1,
+                    0.75
+                  ],
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation": null,
+                  "faces": {
+                    "north": [
+                      15,
+                      0,
+                      0,
+                      10
+                    ],
+                    "east": [
+                      15,
+                      0,
+                      15,
+                      10
+                    ],
+                    "south": [
+                      30,
+                      0,
+                      15,
+                      10
+                    ],
+                    "west": [
+                      0,
+                      0,
+                      0,
+                      10
+                    ],
+                    "up": [
+                      0,
+                      0,
+                      15,
+                      0
+                    ],
+                    "down": [
+                      15,
+                      0,
+                      30,
+                      0
+                    ]
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "name": "bone2",
+                  "parent": "bone",
+                  "origin": [
+                    9.5,
+                    1.5,
+                    0.5
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "bone2",
+                      "from": [
+                        9.5,
+                        1,
+                        0.25
+                      ],
+                      "to": [
+                        16.5,
+                        2,
+                        1.75
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          21,
+                          27,
+                          28,
+                          28
+                        ],
+                        "east": [
+                          20,
+                          27,
+                          21,
+                          28
+                        ],
+                        "south": [
+                          29,
+                          27,
+                          36,
+                          28
+                        ],
+                        "west": [
+                          28,
+                          27,
+                          29,
+                          28
+                        ],
+                        "up": [
+                          28,
+                          27,
+                          21,
+                          26
+                        ],
+                        "down": [
+                          35,
+                          26,
+                          28,
+                          27
+                        ]
+                      }
+                    },
+                    {
+                      "name": "bone2",
+                      "from": [
+                        9.5,
+                        -7,
+                        1
+                      ],
+                      "to": [
+                        28.5,
+                        2,
+                        1
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          19,
+                          14,
+                          0,
+                          23
+                        ],
+                        "east": [
+                          19,
+                          14,
+                          19,
+                          23
+                        ],
+                        "south": [
+                          38,
+                          14,
+                          19,
+                          23
+                        ],
+                        "west": [
+                          0,
+                          14,
+                          0,
+                          23
+                        ],
+                        "up": [
+                          0,
+                          14,
+                          19,
+                          14
+                        ],
+                        "down": [
+                          19,
+                          14,
+                          38,
+                          14
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone5",
+              "parent": "wings_1",
+              "origin": [
+                26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle",
+                  "parent": "bone5",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          33,
+                          0,
+                          36
+                        ],
+                        "east": [
+                          3,
+                          33,
+                          3,
+                          36
+                        ],
+                        "south": [
+                          6,
+                          33,
+                          3,
+                          36
+                        ],
+                        "west": [
+                          0,
+                          33,
+                          0,
+                          36
+                        ],
+                        "up": [
+                          0,
+                          33,
+                          3,
+                          33
+                        ],
+                        "down": [
+                          3,
+                          33,
+                          6,
+                          33
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone6",
+              "parent": "wings_1",
+              "origin": [
+                26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle2",
+                  "parent": "bone6",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle2",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone7",
+              "parent": "wings_1",
+              "origin": [
+                26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle3",
+                  "parent": "bone7",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle3",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone3",
+              "parent": "wings_1",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle4",
+                  "parent": "bone3",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle4",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone4",
+              "parent": "wings_1",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle5",
+                  "parent": "bone4",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle5",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone8",
+              "parent": "wings_1",
+              "origin": [
+                26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle6",
+                  "parent": "bone8",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle6",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone9",
+              "parent": "wings_1",
+              "origin": [
+                26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle7",
+                  "parent": "bone9",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle7",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone10",
+              "parent": "wings_1",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle8",
+                  "parent": "bone10",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle8",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone11",
+              "parent": "wings_1",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle9",
+                  "parent": "bone11",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle9",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone12",
+              "parent": "wings_1",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle10",
+                  "parent": "bone12",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle10",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone13",
+              "parent": "wings_1",
+              "origin": [
+                26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle11",
+                  "parent": "bone13",
+                  "origin": [
+                    26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle11",
+                      "from": [
+                        25.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        28.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          3,
+                          36,
+                          0,
+                          39
+                        ],
+                        "east": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "south": [
+                          6,
+                          36,
+                          3,
+                          39
+                        ],
+                        "west": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "up": [
+                          0,
+                          36,
+                          3,
+                          36
+                        ],
+                        "down": [
+                          3,
+                          36,
+                          6,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "wings_2",
+          "parent": "all",
+          "origin": [
+            0,
+            0,
+            0
+          ],
+          "rotation": [
+            0,
+            0,
+            0
+          ],
+          "is_left": false,
+          "is_right": false,
+          "cubes": [],
+          "children": [
+            {
+              "name": "bone14",
+              "parent": "wings_2",
+              "origin": [
+                -0.5,
+                1.5,
+                0.5
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [
+                {
+                  "name": "bone14",
+                  "from": [
+                    -9.5,
+                    1,
+                    0
+                  ],
+                  "to": [
+                    -0.5,
+                    2,
+                    1.5
+                  ],
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation": null,
+                  "faces": {
+                    "north": [
+                      10,
+                      27,
+                      1,
+                      28
+                    ],
+                    "east": [
+                      11,
+                      27,
+                      10,
+                      28
+                    ],
+                    "south": [
+                      20,
+                      27,
+                      11,
+                      28
+                    ],
+                    "west": [
+                      1,
+                      27,
+                      0,
+                      28
+                    ],
+                    "up": [
+                      1,
+                      27,
+                      10,
+                      26
+                    ],
+                    "down": [
+                      10,
+                      26,
+                      19,
+                      27
+                    ]
+                  }
+                },
+                {
+                  "name": "bone14",
+                  "from": [
+                    -14.5,
+                    -9,
+                    0.75
+                  ],
+                  "to": [
+                    0.5,
+                    1,
+                    0.75
+                  ],
+                  "origin": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "rotation": null,
+                  "faces": {
+                    "north": [
+                      0,
+                      0,
+                      15,
+                      10
+                    ],
+                    "east": [
+                      0,
+                      0,
+                      0,
+                      10
+                    ],
+                    "south": [
+                      15,
+                      0,
+                      30,
+                      10
+                    ],
+                    "west": [
+                      15,
+                      0,
+                      15,
+                      10
+                    ],
+                    "up": [
+                      15,
+                      0,
+                      0,
+                      0
+                    ],
+                    "down": [
+                      30,
+                      0,
+                      15,
+                      0
+                    ]
+                  }
+                }
+              ],
+              "children": [
+                {
+                  "name": "bone15",
+                  "parent": "bone14",
+                  "origin": [
+                    -9.5,
+                    1.5,
+                    0.5
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    0
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "bone15",
+                      "from": [
+                        -16.5,
+                        1,
+                        0.25
+                      ],
+                      "to": [
+                        -9.5,
+                        2,
+                        1.75
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          28,
+                          27,
+                          21,
+                          28
+                        ],
+                        "east": [
+                          29,
+                          27,
+                          28,
+                          28
+                        ],
+                        "south": [
+                          36,
+                          27,
+                          29,
+                          28
+                        ],
+                        "west": [
+                          21,
+                          27,
+                          20,
+                          28
+                        ],
+                        "up": [
+                          21,
+                          27,
+                          28,
+                          26
+                        ],
+                        "down": [
+                          28,
+                          26,
+                          35,
+                          27
+                        ]
+                      }
+                    },
+                    {
+                      "name": "bone15",
+                      "from": [
+                        -28.5,
+                        -7,
+                        1
+                      ],
+                      "to": [
+                        -9.5,
+                        2,
+                        1
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          14,
+                          19,
+                          23
+                        ],
+                        "east": [
+                          0,
+                          14,
+                          0,
+                          23
+                        ],
+                        "south": [
+                          19,
+                          14,
+                          38,
+                          23
+                        ],
+                        "west": [
+                          19,
+                          14,
+                          19,
+                          23
+                        ],
+                        "up": [
+                          19,
+                          14,
+                          0,
+                          14
+                        ],
+                        "down": [
+                          38,
+                          14,
+                          19,
+                          14
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone16",
+              "parent": "wings_2",
+              "origin": [
+                -26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle12",
+                  "parent": "bone16",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle12",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          33,
+                          3,
+                          36
+                        ],
+                        "east": [
+                          0,
+                          33,
+                          0,
+                          36
+                        ],
+                        "south": [
+                          3,
+                          33,
+                          6,
+                          36
+                        ],
+                        "west": [
+                          3,
+                          33,
+                          3,
+                          36
+                        ],
+                        "up": [
+                          3,
+                          33,
+                          0,
+                          33
+                        ],
+                        "down": [
+                          6,
+                          33,
+                          3,
+                          33
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone17",
+              "parent": "wings_2",
+              "origin": [
+                -26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle13",
+                  "parent": "bone17",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle13",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone18",
+              "parent": "wings_2",
+              "origin": [
+                -26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle14",
+                  "parent": "bone18",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle14",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone19",
+              "parent": "wings_2",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle15",
+                  "parent": "bone19",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle15",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone20",
+              "parent": "wings_2",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle16",
+                  "parent": "bone20",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle16",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone21",
+              "parent": "wings_2",
+              "origin": [
+                -26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle17",
+                  "parent": "bone21",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle17",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone22",
+              "parent": "wings_2",
+              "origin": [
+                -26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle18",
+                  "parent": "bone22",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle18",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone23",
+              "parent": "wings_2",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle19",
+                  "parent": "bone23",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle19",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone24",
+              "parent": "wings_2",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle20",
+                  "parent": "bone24",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle20",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone25",
+              "parent": "wings_2",
+              "origin": [
+                0,
+                0,
+                0
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle21",
+                  "parent": "bone25",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle21",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            },
+            {
+              "name": "bone26",
+              "parent": "wings_2",
+              "origin": [
+                -26.75,
+                -2.5,
+                2
+              ],
+              "rotation": [
+                0,
+                0,
+                0
+              ],
+              "is_left": false,
+              "is_right": false,
+              "cubes": [],
+              "children": [
+                {
+                  "name": "particle22",
+                  "parent": "bone26",
+                  "origin": [
+                    -26.64086,
+                    -2.29884,
+                    2
+                  ],
+                  "rotation": [
+                    0,
+                    0,
+                    -20
+                  ],
+                  "is_left": false,
+                  "is_right": false,
+                  "cubes": [
+                    {
+                      "name": "particle22",
+                      "from": [
+                        -28.14086,
+                        -3.79884,
+                        2
+                      ],
+                      "to": [
+                        -25.14086,
+                        -0.79884,
+                        2
+                      ],
+                      "origin": [
+                        0,
+                        0,
+                        0
+                      ],
+                      "rotation": null,
+                      "faces": {
+                        "north": [
+                          0,
+                          36,
+                          3,
+                          39
+                        ],
+                        "east": [
+                          0,
+                          36,
+                          0,
+                          39
+                        ],
+                        "south": [
+                          3,
+                          36,
+                          6,
+                          39
+                        ],
+                        "west": [
+                          3,
+                          36,
+                          3,
+                          39
+                        ],
+                        "up": [
+                          3,
+                          36,
+                          0,
+                          36
+                        ],
+                        "down": [
+                          6,
+                          36,
+                          3,
+                          36
+                        ]
+                      }
+                    }
+                  ],
+                  "children": []
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "animations": {
+    "idle": {
+      "length": 2.0,
+      "bones": {
+        "bone": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              42.5
+            ]
+          },
+          {
+            "t": 0.75,
+            "r": [
+              0.0,
+              0.0,
+              -20.0
+            ]
+          },
+          {
+            "t": 2.0,
+            "r": [
+              0.0,
+              0.0,
+              42.5
+            ]
+          }
+        ],
+        "bone2": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              27.5
+            ]
+          },
+          {
+            "t": 0.4167,
+            "r": [
+              0.0,
+              0.0,
+              35.94
+            ]
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              0.0,
+              -37.5
+            ]
+          },
+          {
+            "t": 2.0,
+            "r": [
+              0.0,
+              0.0,
+              27.5
+            ]
+          }
+        ],
+        "particle": [
+          {
+            "t": 0.9167,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.1667,
+            "r": [
+              0.0,
+              0.0,
+              -72.5
+            ]
+          }
+        ],
+        "particle2": [
+          {
+            "t": 1.2083,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.5,
+            "r": [
+              0.0,
+              0.0,
+              -72.5
+            ]
+          }
+        ],
+        "particle3": [
+          {
+            "t": 0.7917,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.2917,
+            "r": [
+              0.0,
+              0.0,
+              -72.5
+            ]
+          }
+        ],
+        "particle6": [
+          {
+            "t": 1.3333,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.875,
+            "r": [
+              0.0,
+              0.0,
+              57.5
+            ]
+          }
+        ],
+        "particle7": [
+          {
+            "t": 1.125,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.9583,
+            "r": [
+              0.0,
+              0.0,
+              57.5
+            ]
+          }
+        ],
+        "particle11": [
+          {
+            "t": 0.25,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.375,
+            "r": [
+              0.0,
+              0.0,
+              57.5
+            ]
+          }
+        ],
+        "wings_1": [
+          {
+            "t": 0.0,
+            "r": [
+              11.01,
+              24.59,
+              4.63
+            ]
+          },
+          {
+            "t": 0.8333,
+            "r": [
+              27.35,
+              33.04,
+              20.44
+            ]
+          },
+          {
+            "t": 1.375,
+            "r": [
+              13.83,
+              0.13,
+              14.01
+            ]
+          },
+          {
+            "t": 2.0,
+            "r": [
+              11.01,
+              24.59,
+              4.63
+            ]
+          }
+        ],
+        "wings_2": [
+          {
+            "t": 0.0,
+            "r": [
+              11.01,
+              -24.59,
+              -4.63
+            ]
+          },
+          {
+            "t": 0.8333,
+            "r": [
+              27.35,
+              -33.04,
+              -20.44
+            ]
+          },
+          {
+            "t": 1.375,
+            "r": [
+              13.83,
+              -0.13,
+              -14.01
+            ]
+          },
+          {
+            "t": 2.0,
+            "r": [
+              11.01,
+              -24.59,
+              -4.63
+            ]
+          }
+        ],
+        "bone14": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              -42.5
+            ]
+          },
+          {
+            "t": 0.75,
+            "r": [
+              0.0,
+              0.0,
+              20.0
+            ]
+          },
+          {
+            "t": 2.0,
+            "r": [
+              0.0,
+              0.0,
+              -42.5
+            ]
+          }
+        ],
+        "bone15": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              -27.5
+            ]
+          },
+          {
+            "t": 0.4167,
+            "r": [
+              0.0,
+              0.0,
+              -35.94
+            ]
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              0.0,
+              37.5
+            ]
+          },
+          {
+            "t": 2.0,
+            "r": [
+              0.0,
+              0.0,
+              -27.5
+            ]
+          }
+        ],
+        "particle12": [
+          {
+            "t": 0.9167,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.1667,
+            "r": [
+              0.0,
+              0.0,
+              72.5
+            ]
+          }
+        ],
+        "particle13": [
+          {
+            "t": 1.2083,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.5,
+            "r": [
+              0.0,
+              0.0,
+              72.5
+            ]
+          }
+        ],
+        "particle14": [
+          {
+            "t": 0.7917,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.2917,
+            "r": [
+              0.0,
+              0.0,
+              72.5
+            ]
+          }
+        ],
+        "particle17": [
+          {
+            "t": 1.3333,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.875,
+            "r": [
+              0.0,
+              0.0,
+              -57.5
+            ]
+          }
+        ],
+        "particle18": [
+          {
+            "t": 1.125,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.9583,
+            "r": [
+              0.0,
+              0.0,
+              -57.5
+            ]
+          }
+        ],
+        "particle22": [
+          {
+            "t": 0.25,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.375,
+            "r": [
+              0.0,
+              0.0,
+              -57.5
+            ]
+          }
+        ]
+      }
+    },
+    "walk": {
+      "length": 1.0,
+      "bones": {
+        "bone": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              42.5
+            ]
+          },
+          {
+            "t": 0.375,
+            "r": [
+              0.0,
+              0.0,
+              -20.0
+            ]
+          },
+          {
+            "t": 1.0417,
+            "r": [
+              0.0,
+              0.0,
+              42.5
+            ]
+          }
+        ],
+        "bone2": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              27.5
+            ]
+          },
+          {
+            "t": 0.2083,
+            "r": [
+              0.0,
+              0.0,
+              35.94
+            ]
+          },
+          {
+            "t": 0.5,
+            "r": [
+              0.0,
+              0.0,
+              -37.5
+            ]
+          },
+          {
+            "t": 1.0417,
+            "r": [
+              0.0,
+              0.0,
+              27.5
+            ]
+          }
+        ],
+        "particle": [
+          {
+            "t": 0.4583,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.625,
+            "r": [
+              0.0,
+              0.0,
+              -72.5
+            ]
+          }
+        ],
+        "particle2": [
+          {
+            "t": 0.625,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.7917,
+            "r": [
+              0.0,
+              0.0,
+              -72.5
+            ]
+          }
+        ],
+        "particle3": [
+          {
+            "t": 0.4167,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.6667,
+            "r": [
+              0.0,
+              0.0,
+              -72.5
+            ]
+          }
+        ],
+        "particle6": [
+          {
+            "t": 0.7083,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.9583,
+            "r": [
+              0.0,
+              0.0,
+              57.5
+            ]
+          }
+        ],
+        "particle7": [
+          {
+            "t": 0.5833,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              0.0,
+              57.5
+            ]
+          }
+        ],
+        "particle11": [
+          {
+            "t": 0.125,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.7083,
+            "r": [
+              0.0,
+              0.0,
+              57.5
+            ]
+          }
+        ],
+        "wings_1": [
+          {
+            "t": 0.0,
+            "r": [
+              11.01,
+              24.59,
+              4.63
+            ]
+          },
+          {
+            "t": 0.4167,
+            "r": [
+              27.35,
+              33.04,
+              20.44
+            ]
+          },
+          {
+            "t": 0.7083,
+            "r": [
+              13.83,
+              0.13,
+              14.01
+            ]
+          },
+          {
+            "t": 1.0417,
+            "r": [
+              11.01,
+              24.59,
+              4.63
+            ]
+          }
+        ],
+        "wings_2": [
+          {
+            "t": 0.0,
+            "r": [
+              11.01,
+              -24.59,
+              -4.63
+            ]
+          },
+          {
+            "t": 0.4167,
+            "r": [
+              27.35,
+              -33.04,
+              -20.44
+            ]
+          },
+          {
+            "t": 0.7083,
+            "r": [
+              13.83,
+              -0.13,
+              -14.01
+            ]
+          },
+          {
+            "t": 1.0417,
+            "r": [
+              11.01,
+              -24.59,
+              -4.63
+            ]
+          }
+        ],
+        "bone14": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              -42.5
+            ]
+          },
+          {
+            "t": 0.375,
+            "r": [
+              0.0,
+              0.0,
+              20.0
+            ]
+          },
+          {
+            "t": 1.0417,
+            "r": [
+              0.0,
+              0.0,
+              -42.5
+            ]
+          }
+        ],
+        "bone15": [
+          {
+            "t": 0.0,
+            "r": [
+              0.0,
+              0.0,
+              -27.5
+            ]
+          },
+          {
+            "t": 0.2083,
+            "r": [
+              0.0,
+              0.0,
+              -35.94
+            ]
+          },
+          {
+            "t": 0.5,
+            "r": [
+              0.0,
+              0.0,
+              37.5
+            ]
+          },
+          {
+            "t": 1.0417,
+            "r": [
+              0.0,
+              0.0,
+              -27.5
+            ]
+          }
+        ],
+        "particle12": [
+          {
+            "t": 0.4583,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.625,
+            "r": [
+              0.0,
+              0.0,
+              72.5
+            ]
+          }
+        ],
+        "particle13": [
+          {
+            "t": 0.625,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.7917,
+            "r": [
+              0.0,
+              0.0,
+              72.5
+            ]
+          }
+        ],
+        "particle14": [
+          {
+            "t": 0.4167,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.6667,
+            "r": [
+              0.0,
+              0.0,
+              72.5
+            ]
+          }
+        ],
+        "particle17": [
+          {
+            "t": 0.7083,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.9583,
+            "r": [
+              0.0,
+              0.0,
+              -57.5
+            ]
+          }
+        ],
+        "particle18": [
+          {
+            "t": 0.5833,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 1.0,
+            "r": [
+              0.0,
+              0.0,
+              -57.5
+            ]
+          }
+        ],
+        "particle22": [
+          {
+            "t": 0.125,
+            "r": [
+              0.0,
+              0.0,
+              0.0
+            ]
+          },
+          {
+            "t": 0.7083,
+            "r": [
+              0.0,
+              0.0,
+              -57.5
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
