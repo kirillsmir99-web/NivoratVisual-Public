@@ -31,6 +31,8 @@ public final class MusicHudComp extends Draggable {
     private static final float BASE_W = 224.0f;
     private static final float BASE_H_WITH_CONTROLS = 60.0f;
     private static final float BASE_H_NO_CONTROLS = 46.0f;
+    private static final float BASE_H_MODE2_WITH_CONTROLS = 58.0f;
+    private static final float BASE_H_MODE2_NO_CONTROLS = 50.0f;
     private final float[] equalizerLevels = new float[12];
     private final float[] equalizerPeaks = new float[12];
     private TrackState displayedState = TrackState.INACTIVE;
@@ -106,7 +108,11 @@ public final class MusicHudComp extends Draggable {
         MusicHudModule mod = ModuleManager.get().get(MusicHudModule.class);
 
         boolean hasControls = mod == null || mod.controls.getValue();
-        return (hasControls ? BASE_H_WITH_CONTROLS : BASE_H_NO_CONTROLS) * this.getScale();
+        boolean isMode2 = mod != null && "Режим 2".equals(mod.mode.getValue());
+        float baseH = isMode2
+            ? (hasControls ? BASE_H_MODE2_WITH_CONTROLS : BASE_H_MODE2_NO_CONTROLS)
+            : (hasControls ? BASE_H_WITH_CONTROLS : BASE_H_NO_CONTROLS);
+        return baseH * this.getScale();
     }
 
     @Override
@@ -225,8 +231,11 @@ public final class MusicHudComp extends Draggable {
         String style = mod.style.getValue();
 
 
+        boolean isMode2 = "Режим 2".equals(mod.mode.getValue());
         float targetW = BASE_W;
-        float targetH = (hasControls ? BASE_H_WITH_CONTROLS : BASE_H_NO_CONTROLS);
+        float targetH = isMode2
+            ? (hasControls ? BASE_H_MODE2_WITH_CONTROLS : BASE_H_MODE2_NO_CONTROLS)
+            : (hasControls ? BASE_H_WITH_CONTROLS : BASE_H_NO_CONTROLS);
 
         this.animatedW.run(targetW, 0.22, Easings.CUBIC_OUT, false);
         this.animatedH.run(targetH, 0.22, Easings.CUBIC_OUT, false);
@@ -252,13 +261,239 @@ public final class MusicHudComp extends Draggable {
 
         Render2D.beginFrame(drawContext);
 
-        this.renderStandardCard(drawContext, x, y, rw, rh, alpha, state, mod, style, hasControls, dominant, accentA, accentB);
+        if (isMode2) {
+            this.renderMode2Card(drawContext, x, y, rw, rh, alpha, state, mod, style, hasControls, dominant, accentA, accentB);
+        } else {
+            this.renderStandardCard(drawContext, x, y, rw, rh, alpha, state, mod, style, hasControls, dominant, accentA, accentB);
+        }
 
         Render2D.flush();
         drawContext.getMatrices().popMatrix();
     }
 
 
+
+    private void renderMode2Card(DrawContext drawContext, float x, float y, float rw, float rh, float alpha,
+                                TrackState state, MusicHudModule mod, String style, boolean hasControls,
+                                int dominant, int accentA, int accentB) {
+        boolean isSquare = "Квадратный".equals(style);
+        float cornerRadius = isSquare ? 3.0f : 10.0f;
+
+        // 1. Неоновый ореол в тон обложки
+        if (mod.glow.getValue()) {
+            float glowInt = mod.glowIntensity.getFloat();
+            int glowCol = boostGlowColor(dominant, accentA);
+            Render2D.glow(new BuiltGlow(
+                x - 2.0f, y - 2.0f, rw + 4.0f, rh + 4.0f,
+                new float[]{cornerRadius, cornerRadius, cornerRadius, cornerRadius},
+                glowCol, 0.65f * glowInt, 8.0f * glowInt, 0.22f * alpha
+            ));
+        }
+
+        // 2. Подложка матового стекла (Frost Glass) с размытием Кавасе или квадратная пластина
+        if (isSquare) {
+            int bg = ColorUtil.rgba(11, 14, 20, (int) (248 * alpha));
+            Render2D.rect(x, y, rw, rh, cornerRadius, bg);
+            Render2D.rect(x + 1, y + 7, 1.2f, rh - 14, .6f, ColorUtil.multAlpha(accentA, .65f));
+            Render2D.rect(x + 7, y + 1, rw - 14, .6f, .3f, ColorUtil.rgba(255, 255, 255, (int)(24 * alpha)));
+            int borderCol = ColorUtil.rgba(255, 255, 255, (int) (26 * alpha));
+            Render2D.outline(x, y, rw, rh, cornerRadius, .8f, borderCol);
+        } else {
+            // Матовое стекло Frost Glass с размытием Кавасе
+            RectUtil.drawClientRectFixedRadius(x, y, rw, rh, cornerRadius, alpha, 0.0f);
+            Render2D.rect(x + 10, y + 1, rw - 20, .6f, .3f, ColorUtil.rgba(255, 255, 255, (int)(46 * alpha)));
+            Render2D.rect(x + 3, y + 8, .55f, rh - 16, .25f, ColorUtil.multAlpha(accentA, .16f));
+            int borderCol = ColorUtil.rgba(255, 255, 255, (int) (32 * alpha));
+            Render2D.outline(x, y, rw, rh, cornerRadius, 1.0f, borderCol);
+        }
+
+        // 3. Обложка альбома (42x42 скругленный квадрат)
+        float coverSize = 42.0f;
+        float coverX = x + 8.0f;
+        float coverY = y + 8.0f;
+        float contentStartX = x + 10.0f;
+
+        if (mod.showCover.getValue()) {
+            CoverTextureManager coverMgr = MusicManager.get().getCoverManager();
+            String coverTex = coverMgr.hasCustomCover() ? "nv:dynamic/album_cover" : "nv:textures/gui/default_cover.png";
+            float coverRad = isSquare ? 2.5f : 6.0f;
+
+            Render2D.image(coverTex, coverX, coverY, coverSize, coverSize, coverRad, ColorUtil.rgba(255, 255, 255, (int)(255 * alpha)));
+            Render2D.outline(coverX, coverY, coverSize, coverSize, coverRad, 1.0f, ColorUtil.rgba(255, 255, 255, (int) (40 * alpha)));
+
+            contentStartX = coverX + coverSize + 8.0f; // x + 58.0f
+        }
+
+        // 4. Анимированный аудио-эквалайзер (12 полос в такт треку)
+        float eqW = 12 * 3.2f; // 38.4f
+        float eqX = x + rw - eqW - 8.0f;
+        float eqY = y + 9.5f;
+        float eqMaxH = 11.5f;
+
+        if (mod.equalizer.getValue() && state.isActive()) {
+            long time = System.currentTimeMillis();
+            long now = System.nanoTime();
+            float dt = equalizerNanos == 0 ? .016f : Math.min(.1f, (now - equalizerNanos) / 1_000_000_000f);
+            equalizerNanos = now;
+            for (int b = 0; b < 12; b++) {
+                float barVal = state.isPlaying() ? computeEqualizerBar(b, 12, time) : 0f;
+                float speed = barVal > equalizerLevels[b] ? 18f : 6f;
+                equalizerLevels[b] += (barVal - equalizerLevels[b]) * (1f - (float)Math.exp(-dt * speed));
+                equalizerPeaks[b] = Math.max(equalizerLevels[b], equalizerPeaks[b] - dt * .45f);
+                float hBar = Math.max(1.2f, equalizerLevels[b] * eqMaxH);
+                int barCol = ColorUtil.lerpColor(accentA, accentB, b / 11f);
+                float bx = eqX + b * 3.2f;
+                Render2D.rect(bx, eqY + eqMaxH - hBar, 1.8f, hBar, .6f, ColorUtil.multAlpha(barCol, state.isPlaying() ? .90f * alpha : .40f * alpha));
+                if (equalizerPeaks[b] > .08f) {
+                    Render2D.rect(bx, eqY + eqMaxH - equalizerPeaks[b] * eqMaxH - 0.5f, 1.8f, .6f, .3f, ColorUtil.rgba(255, 255, 255, (int)(140 * alpha)));
+                }
+            }
+        }
+
+        // 5. Текст: Название трека и Исполнитель
+        float maxTitleW = (mod.equalizer.getValue() && state.isActive() ? eqX - 6.0f : x + rw - 8.0f) - contentStartX;
+        float titleY = y + 8.5f;
+        float artistY = titleY + 11.0f;
+
+        String title = state.isActive() ? state.title() : "Музыка не играет";
+        String artist = state.isActive() ? state.artist() : "Запустите трек в плеере";
+
+        String dispTitle = truncate(title, maxTitleW, 6.4f, true);
+        Fonts.MONTSERRAT_BOLD.msdf(dispTitle, contentStartX, titleY, 6.4f, ColorUtil.rgba(255, 255, 255, (int) (245 * alpha)));
+
+        float artistW = Fonts.MONTSERRAT_MEDIUM.width(artist, 5.2f);
+        if (artistW > maxTitleW) {
+            String truncArtist = truncate(artist, maxTitleW - 3.0f, 5.2f, false);
+            Fonts.MONTSERRAT_MEDIUM.msdf(truncArtist, contentStartX, artistY, 5.2f, ColorUtil.rgba(175, 180, 195, (int) (210 * alpha)));
+        } else {
+            Fonts.MONTSERRAT_MEDIUM.msdf(artist, contentStartX, artistY, 5.2f, ColorUtil.rgba(175, 180, 195, (int) (210 * alpha)));
+        }
+
+        // 6. Таймлайн (Полоса прогресса со скруббингом)
+        float barY = y + 32.0f;
+        float barH = 3.0f;
+        float barW = x + rw - contentStartX - 8.0f;
+
+        MinecraftClient mc = MinecraftClient.getInstance();
+        float mx = Position.mouseX();
+        float my = Position.mouseY();
+        float scale = this.getScale();
+        float localMx = (mx - x) / scale + x;
+        float localMy = (my - y) / scale + y;
+
+        boolean inScreen = mc != null && mc.currentScreen != null;
+        boolean hoverTimeline = inScreen && localMy >= barY - 4.5f && localMy <= barY + barH + 4.5f
+            && localMx >= contentStartX && localMx <= contentStartX + barW;
+
+        if (hoverTimeline || this.isScrubbing) {
+            this.scrubHover = Math.min(1.0f, this.scrubHover + 0.15f);
+        } else {
+            this.scrubHover = Math.max(0.0f, this.scrubHover - 0.12f);
+        }
+
+        if (this.isScrubbing && inScreen) {
+            long handle = mc.getWindow().getHandle();
+            if (GLFW.glfwGetMouseButton(handle, GLFW.GLFW_MOUSE_BUTTON_1) == GLFW.GLFW_PRESS) {
+                this.scrubProgress = Math.max(0.0f, Math.min(1.0f, (localMx - contentStartX) / barW));
+                this.lastUserInteractMs = System.currentTimeMillis();
+            } else {
+                this.isScrubbing = false;
+                double targetSeconds = this.scrubProgress * (state.durationMs() / 1000.0);
+                MusicManager.get().seekToSeconds(targetSeconds);
+                this.lastUserInteractMs = System.currentTimeMillis();
+            }
+        }
+
+        if (mod.timeline.getValue()) {
+            float curBarH = barH + this.scrubHover * 1.5f;
+            float curBarY = barY - this.scrubHover * 0.75f;
+            int barBg = ColorUtil.rgba(255, 255, 255, (int) (28 * alpha));
+            Render2D.rect(contentStartX, curBarY, barW, curBarH, isSquare ? 0.0f : 1.5f, barBg);
+
+            float currentProgress = this.isScrubbing ? this.scrubProgress : state.progress();
+            if (currentProgress > 0.0f) {
+                float fillW = Math.max(2.5f, barW * currentProgress);
+                int fillCol = dominant != 0 ? ColorUtil.lerpColor(dominant, accentA, 0.25f) : ColorUtil.lerpColor(accentA, accentB, currentProgress);
+                Render2D.rect(contentStartX, curBarY, fillW, curBarH, isSquare ? 0.0f : 1.5f, ColorUtil.multAlpha(fillCol, alpha));
+
+                // Glowing Scrubber Knob
+                if (this.scrubHover > 0.05f || this.isScrubbing) {
+                    float knobX = contentStartX + barW * currentProgress;
+                    float knobY = curBarY + curBarH * 0.5f;
+                    float knobRad = 3.0f + this.scrubHover * 0.8f;
+                    Render2D.circle(knobX, knobY, knobRad, ColorUtil.rgba(255, 255, 255, (int) (255 * alpha)));
+                    Render2D.circle(knobX, knobY, knobRad + 1.2f, ColorUtil.multAlpha(fillCol, 0.7f * alpha));
+
+                    // Floating Tooltip Badge when dragging
+                    if (this.isScrubbing) {
+                        long scrubMs = (long) (this.scrubProgress * state.durationMs());
+                        String scrubTime = TrackState.formatTime(scrubMs);
+                        float tipW = Fonts.MONTSERRAT_BOLD.width(scrubTime, 4.5f) + 6.0f;
+                        float tipH = 9.5f;
+                        float tipX = knobX - tipW * 0.5f;
+                        float tipY = knobY - knobRad - tipH - 2.5f;
+                        Render2D.rect(tipX, tipY, tipW, tipH, isSquare ? 0.0f : 2.0f, ColorUtil.rgba(14, 16, 22, (int) (245 * alpha)));
+                        Render2D.outline(tipX, tipY, tipW, tipH, isSquare ? 0.0f : 2.0f, 0.8f, fillCol);
+                        Fonts.MONTSERRAT_BOLD.msdf(scrubTime, tipX + 3.0f, tipY + 1.5f, 4.5f, 0xFFFFFFFF);
+                    }
+                }
+            }
+        }
+
+        // 7. Кнопки управления (Previous, Play/Pause, Next, Favorite)
+        float btnRowY = y + 39.5f;
+        if (hasControls) {
+            this.updateButtonHovers(x, y, this.getScale(), btnRowY, contentStartX);
+
+            float btnRad = isSquare ? 0.0f : 3.5f;
+            this.renderButton(contentStartX, btnRowY, HudBtnType.PREV, this.hoverPrev, alpha, accentA, btnRad);
+            HudBtnType playType = state.isPlaying() ? HudBtnType.PAUSE : HudBtnType.PLAY;
+            this.renderButton(contentStartX + 18.0f, btnRowY, playType, this.hoverPlay, alpha, accentA, btnRad);
+            this.renderButton(contentStartX + 36.0f, btnRowY, HudBtnType.NEXT, this.hoverNext, alpha, accentA, btnRad);
+
+            boolean isFav = state.isActive() && MusicManager.get().getFavorites().isFavorite(state.artist(), state.title());
+            int favColor = isFav ? 0xFFFF4477 : accentA;
+            this.renderButton(contentStartX + 54.0f, btnRowY, HudBtnType.FAV, this.hoverFav, alpha, favColor, btnRad);
+        }
+
+        // 8. Таймер воспроизведения (справа в строке кнопок)
+        long posMs = this.isScrubbing ? (long) (this.scrubProgress * state.durationMs()) : state.currentPositionMs();
+        String posStr = TrackState.formatTime(posMs);
+        String slashStr = " / ";
+        String durStr = state.formattedDuration();
+
+        float timeSize = 5.2f;
+        float posW = Fonts.MONTSERRAT_BOLD.width(posStr, timeSize);
+        float slashW = Fonts.MONTSERRAT_MEDIUM.width(slashStr, timeSize);
+        float durW = Fonts.MONTSERRAT_BOLD.width(durStr, timeSize);
+        float totalTimeW = posW + slashW + durW;
+
+        float badgeW = totalTimeW + 8.0f;
+        float badgeH = 12.0f;
+        float badgeX = x + rw - badgeW - 8.0f;
+        float badgeY = hasControls ? btnRowY + 0.5f : (barY + 6.0f);
+
+        if (isSquare) {
+            Render2D.rect(badgeX, badgeY, badgeW, badgeH, 0.0f, ColorUtil.rgba(11, 14, 20, (int) (245 * alpha)));
+            Render2D.outline(badgeX, badgeY, badgeW, badgeH, 0.0f, 0.8f, ColorUtil.rgba(255, 255, 255, (int) (50 * alpha)));
+        } else {
+            Render2D.rect(badgeX, badgeY, badgeW, badgeH, 3.0f, ColorUtil.rgba(14, 18, 26, (int) (180 * alpha)));
+            Render2D.outline(badgeX, badgeY, badgeW, badgeH, 3.0f, 0.8f, ColorUtil.rgba(255, 255, 255, (int) (40 * alpha)));
+        }
+
+        float[] timeBounds = Fonts.MONTSERRAT_BOLD.msdfBounds(posStr + slashStr + durStr, timeSize);
+        float timeTextY = badgeY + badgeH * .5f - (timeBounds[1] + timeBounds[3]) * .5f;
+        float curX = badgeX + 4.0f;
+        int shadowCol = ColorUtil.rgba(0, 0, 0, (int) (170 * alpha));
+        Fonts.MONTSERRAT_BOLD.msdf(posStr, curX + 0.5f, timeTextY + 0.5f, timeSize, shadowCol);
+        Fonts.MONTSERRAT_BOLD.msdf(posStr, curX, timeTextY, timeSize, ColorUtil.rgba(255, 255, 255, (int) (255 * alpha)));
+
+        Fonts.MONTSERRAT_MEDIUM.msdf(slashStr, curX + posW + 0.5f, timeTextY + 0.5f, timeSize, shadowCol);
+        Fonts.MONTSERRAT_MEDIUM.msdf(slashStr, curX + posW, timeTextY, timeSize, ColorUtil.rgba(180, 190, 210, (int) (230 * alpha)));
+
+        Fonts.MONTSERRAT_BOLD.msdf(durStr, curX + posW + slashW + 0.5f, timeTextY + 0.5f, timeSize, shadowCol);
+        Fonts.MONTSERRAT_BOLD.msdf(durStr, curX + posW + slashW, timeTextY, timeSize, ColorUtil.rgba(235, 240, 250, (int) (255 * alpha)));
+    }
 
     private void renderStandardCard(DrawContext drawContext, float x, float y, float rw, float rh, float alpha,
                                     TrackState state, MusicHudModule mod, String style, boolean hasControls,
@@ -636,18 +871,24 @@ public final class MusicHudComp extends Draggable {
 
 
 
+        boolean isMode2 = "Режим 2".equals(mod.mode.getValue());
         TrackState state = MusicManager.get().getClient().getState();
         float localMx = (mx - x) / scale + x;
         float localMy = (my - y) / scale + y;
         float rw = BASE_W;
-        float contentStartX = mod.showCover.getValue() ? x + 6.0f + 36.0f + 8.0f : x + 8.0f;
+        float contentStartX = mod.showCover.getValue() ? (isMode2 ? x + 8.0f + 42.0f + 8.0f : x + 6.0f + 36.0f + 8.0f) : (isMode2 ? x + 10.0f : x + 8.0f);
 
         // Check timeline scrub click
         if (mod.timeline.getValue() && event.button == 0 && state.durationMs() > 0L) {
-            float artistY = y + 6.0f + 9.5f;
-            float barY = artistY + 9.5f;
+            float barY;
             float barH = 3.0f;
             float barW = x + rw - contentStartX - 8.0f;
+            if (isMode2) {
+                barY = y + 32.0f;
+            } else {
+                float artistY = y + 6.0f + 9.5f;
+                barY = artistY + 9.5f;
+            }
             if (localMy >= barY - 4.5f && localMy <= barY + barH + 4.5f && localMx >= contentStartX && localMx <= contentStartX + barW) {
                 this.isScrubbing = true;
                 this.scrubProgress = Math.max(0.0f, Math.min(1.0f, (localMx - contentStartX) / barW));
@@ -665,7 +906,7 @@ public final class MusicHudComp extends Draggable {
         }
 
         float rh = (float) this.animatedH.get();
-        float btnRowY = y + rh - 17.0f;
+        float btnRowY = isMode2 ? (y + 39.5f) : (y + rh - 17.0f);
         float bh = 13.0f;
         float bw = 15.0f;
 
@@ -693,7 +934,7 @@ public final class MusicHudComp extends Draggable {
             event.cancel();
             return;
         }
-        if (localMx >= contentStartX + 72.0f - 2.0f && localMx <= contentStartX + 72.0f + bw + 2.0f) {
+        if (!isMode2 && localMx >= contentStartX + 72.0f - 2.0f && localMx <= contentStartX + 72.0f + bw + 2.0f) {
             MusicManager.get().openMusicDial();
             event.cancel();
         }

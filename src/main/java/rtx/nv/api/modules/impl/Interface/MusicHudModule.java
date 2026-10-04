@@ -16,6 +16,13 @@ public final class MusicHudModule extends InterfaceComponentModule {
         "Автоматически", "Автоматически", "Яндекс Музыка", "VK Музыка", "Spotify", "Браузер"
     )).visibleWhen(() -> System.getProperty("os.name", "").toLowerCase(java.util.Locale.ROOT).contains("win"));
 
+    public final ModeSetting mode = this.register(new ModeSetting(
+        "Режим",
+        "Режим компоновки музыкального плеера.",
+        "Режим 1",
+        "Режим 1", "Режим 2"
+    ));
+
     public final ModeSetting style = this.register(new ModeSetting(
         "Стиль",
         "Стиль визуального оформления карточки виджета.",
