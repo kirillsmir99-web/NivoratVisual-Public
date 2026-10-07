@@ -24,8 +24,17 @@ import net.minecraft.util.Identifier;
 import net.minecraft.util.hit.EntityHitResult;
 import net.minecraft.util.hit.HitResult;
 import net.minecraft.util.math.Vec3d;
+import net.minecraft.client.render.entity.EntityRenderManager;
+import net.minecraft.client.render.entity.EntityRenderer;
+import net.minecraft.client.render.entity.state.BipedEntityRenderState;
+import net.minecraft.client.render.entity.state.EntityRenderState;
+import net.minecraft.client.render.entity.state.LivingEntityRenderState;
+import net.minecraft.entity.EntityPose;
 import org.joml.Matrix3x2f;
+import org.joml.Quaternionf;
+import org.joml.Vector3f;
 import org.joml.Vector4f;
+import rtx.nv.api.ui.GuiEntityBounds;
 import rtx.nv.api.drags.DragSystem;
 import rtx.nv.api.drags.Draggable;
 import rtx.nv.api.drags.Position;
@@ -85,37 +94,7 @@ extends Draggable {
     private static final float ARMOR_GAP = 3.0f;
     private static final float CLASSIC_ARMOR_EXTRA = 11.0f;
     private static final float NEW_ARMOR_COLLAPSE = 10.0f;
-    private static final int PARTICLE_COUNT = 12;
-    private static final float PARTICLE_MOVE_SPEED = 36.0f;
-    private static final float PARTICLE_LIFETIME_JITTER = 0.2f;
-    private static final float PARTICLE_FADE_IN = 0.15f;
-
-    private static class HeadParticle {
-        final float startX;
-        final float startY;
-        final float offsetX;
-        final float offsetY;
-        final long startTime;
-        final long lifetime;
-        final float gradient;
-
-        HeadParticle(float startX, float startY, float offsetX, float offsetY, long startTime, long lifetime, float gradient) {
-            this.startX = startX;
-            this.startY = startY;
-            this.offsetX = offsetX;
-            this.offsetY = offsetY;
-            this.startTime = startTime;
-            this.lifetime = lifetime;
-            this.gradient = gradient;
-        }
-
-        float progress(long currentTime) {
-            return Math.max(0.0f, Math.min(1.0f, (float)(currentTime - this.startTime) / (float)this.lifetime));
-        }
-    }
     private final SmoothAnimation visibility = new SmoothAnimation();
-    private final List<HeadParticle> headParticles = new ArrayList<HeadParticle>();
-    private final Random random = new Random();
     private boolean lastTargetVisible;
     private LivingEntity target;
     private long lastSeenMs;
@@ -126,8 +105,9 @@ extends Draggable {
     private float currentWidth = 120.0f;
     private float lastPinnedWidth = Float.NaN;
     private long lastNs = System.nanoTime();
-    private int particleEntityId = Integer.MIN_VALUE;
+    private float damagePulse;
     private int lastParticleHurtTime = -1;
+    private int particleEntityId = Integer.MIN_VALUE;
     private final Vector4f followScratch = new Vector4f();
     private float followScreenX;
     private float followScreenY;
@@ -209,10 +189,18 @@ extends Draggable {
     }
 
     private void drawHeadBackground(DrawContext drawContext, LivingEntity livingEntity, float f, float f2, float f3, float f4, float f5, float f6, float f7) {
-        if (livingEntity instanceof AbstractClientPlayerEntity) {
-            return;
+        float radius = Math.min(f5, f3 * 0.5f);
+        int bg = ColorUtil.multAlpha(-14935006, f6 * 0.55f);
+        Render2D.rect(f, f2, f3, f3, radius, bg);
+
+        int borderBase = ClientAccent.accent(f6 * 0.28f);
+        if (this.damagePulse > 0.005f) {
+            int hurtColor = ColorUtil.multAlpha(0xFFFF3366, f6 * 0.9f);
+            int pulsedBorder = ColorUtil.lerpColor(borderBase, hurtColor, this.damagePulse);
+            Render2D.outline(f, f2, f3, f3, radius, 1.0f, pulsedBorder);
+        } else {
+            Render2D.outline(f, f2, f3, f3, radius, 1.0f, borderBase);
         }
-        Render2D.rect(f, f2, f3, f3, f5, f4, f4, f4, ColorUtil.multAlpha(-14935006, f6 * 0.5f));
     }
 
     private static int armorPieceCount(LivingEntity livingEntity) {
@@ -227,17 +215,26 @@ extends Draggable {
         return n;
     }
 
-    private void updateHitParticles(LivingEntity livingEntity, float f, float f2) {
-        int n;
+    private void updateDamagePulse(LivingEntity livingEntity, float dt) {
+        if (livingEntity == null) {
+            this.damagePulse = 0.0f;
+            return;
+        }
         if (livingEntity.getId() != this.particleEntityId) {
             this.particleEntityId = livingEntity.getId();
             this.lastParticleHurtTime = livingEntity.hurtTime;
-            this.headParticles.clear();
+            this.damagePulse = 0.0f;
+        } else {
+            int n = livingEntity.hurtTime;
+            if (n > this.lastParticleHurtTime && n > 0) {
+                this.damagePulse = 1.0f;
+            }
+            this.lastParticleHurtTime = n;
         }
-        if ((n = livingEntity.hurtTime) > this.lastParticleHurtTime && n > 0) {
-            this.spawnHeadParticles(f, f2, 38.5f, 12);
+        this.damagePulse += (0.0f - this.damagePulse) * (1.0f - (float)Math.exp(-dt * 9.0f));
+        if (this.damagePulse < 0.001f) {
+            this.damagePulse = 0.0f;
         }
-        this.lastParticleHurtTime = n;
     }
 
     private static int healthColor(float f) {
@@ -335,51 +332,6 @@ extends Draggable {
         }
     }
 
-    private void spawnHeadParticles(float f, float f2, float f3, int n) {
-        long l = System.currentTimeMillis();
-        for (int i = 0; i < n; ++i) {
-            float f4 = (0.3333f + this.random.nextFloat() * 0.6667f) * f3;
-            float f5 = (float)Math.toRadians(this.random.nextFloat() * 360.0f);
-            float f6 = (float)Math.sin(f5) * f4;
-            float f7 = (float)(-Math.cos(f5)) * f4;
-            long l2 = Math.max(120L, (long)Math.round(f4 / 36.0f * 1000.0f));
-            float f8 = 1.0f + (this.random.nextFloat() * 2.0f - 1.0f) * 0.2f;
-            long l3 = Math.max(120L, (long)Math.round((float)l2 * f8));
-            float f9 = n <= 1 ? 0.0f : (float)i / (float)(n - 1);
-            this.headParticles.add(new HeadParticle(f, f2, f6, f7, l, l3, f9));
-        }
-    }
-
-    private void drawHitParticles(DrawContext drawContext, float f) {
-        if (this.headParticles.isEmpty()) {
-            return;
-        }
-        long l = System.currentTimeMillis();
-        Iterator<HeadParticle> iterator = this.headParticles.iterator();
-        while (iterator.hasNext()) {
-            HeadParticle headParticle = iterator.next();
-            float f2 = headParticle.progress(l);
-            if (f2 >= 1.0f) {
-                iterator.remove();
-                continue;
-            }
-            float f3 = TargetHudComp.getParticleAlpha(f2) * f;
-            if (f3 <= 0.004f) continue;
-            float f4 = headParticle.startX + headParticle.offsetX * f2;
-            float f5 = headParticle.startY + headParticle.offsetY * f2;
-            float f6 = 1.0f * (0.85f + (1.0f - f2) * 0.15f);
-            int n = ClientAccent.gradientColor(headParticle.gradient, 255.0f) & 0xFFFFFF;
-            Render2D.circle(f4, f5, f6, ColorUtil.multAlpha(n, f3));
-        }
-    }
-
-    private static float getParticleAlpha(float f) {
-        float f2 = Math.max(0.0f, Math.min(1.0f, f));
-        if (f2 <= 0.15f) {
-            return f2 / 0.15f;
-        }
-        return Math.max(0.0f, Math.min(1.0f, 1.0f - (f2 - 0.15f) / 0.85f));
-    }
 
     private static boolean componentEnabled() {
         TargetHudModule targetHudModule = ModuleManager.get().get(TargetHudModule.class);
@@ -478,28 +430,117 @@ extends Draggable {
         return Integer.toString(Math.round(f));
     }
 
-    private void drawHeadForeground(DrawContext drawContext, LivingEntity livingEntity, float f, float f2, float f3, float f4, float f5, float f6) {
-        if (!(livingEntity instanceof AbstractClientPlayerEntity)) {
-            if (livingEntity != null && f6 > .05f) {
-                Render2D.flush();
-                var bounds = rtx.nv.api.ui.GuiEntityBounds.from(drawContext, f, f2, f3, f3);
-                int size = Math.max(1, Math.round(f3 * bounds.scale() * .85f / Math.max(.5f, livingEntity.getHeight())));
-                net.minecraft.client.gui.screen.ingame.InventoryScreen.drawEntity(drawContext,
-                    bounds.left(), bounds.top(), bounds.right(), bounds.bottom(),
-                    size, 0.0f, (bounds.left()+bounds.right())*.5f, (bounds.top()+bounds.bottom())*.5f, livingEntity);
-            }
+    @SuppressWarnings({"rawtypes", "unchecked"})
+    private void drawTargetEntity3D(DrawContext drawContext, LivingEntity livingEntity, float x, float y, float w, float h, float alpha) {
+        if (livingEntity == null || alpha <= 0.05f) {
             return;
         }
+        Render2D.flush();
+
+        GuiEntityBounds bounds = GuiEntityBounds.from(drawContext, x, y, w, h);
+        int left = bounds.left();
+        int top = bounds.top();
+        int right = bounds.right();
+        int bottom = bounds.bottom();
+        int boxW = Math.max(1, right - left);
+        int boxH = Math.max(1, bottom - top);
+        float boxSize = Math.min(boxW, boxH);
+
+        MinecraftClient mc = MinecraftClient.getInstance();
+        EntityRenderManager dispatcher = mc.getEntityRenderDispatcher();
+        EntityRenderer renderer = dispatcher.getRenderer(livingEntity);
+        if (renderer == null) {
+            return;
+        }
+
+        EntityRenderState renderState = renderer.getAndUpdateRenderState(livingEntity, 1.0f);
+        if (renderState == null) {
+            return;
+        }
+
+        renderState.light = 0x00F000F0;
+        if (renderState.shadowPieces != null) {
+            renderState.shadowPieces.clear();
+        }
+        renderState.outlineColor = 0;
+
+        float targetHeight = 1.8f;
+        float targetWidth = 0.6f;
+
+        if (renderState instanceof LivingEntityRenderState livingState) {
+            livingState.hurt = false;
+            livingState.deathTime = 0.0f;
+            livingState.shaking = false;
+            livingState.usingRiptide = false;
+            livingState.touchingWater = false;
+
+            livingState.limbSwingAnimationProgress = 0.0f;
+            livingState.limbSwingAmplitude = 0.0f;
+
+            livingState.bodyYaw = 180.0f + 22.0f;
+            livingState.relativeHeadYaw = -8.0f;
+            if (livingState.pose != EntityPose.GLIDING) {
+                livingState.pitch = 0.0f;
+            }
+
+            if (livingState instanceof BipedEntityRenderState biped) {
+                biped.itemUseTime = 0.0f;
+                biped.leaningPitch = 0.0f;
+                biped.crossbowPullTime = 0.0f;
+            }
+
+            livingState.width /= livingState.baseScale;
+            livingState.height /= livingState.baseScale;
+            livingState.baseScale = 1.0f;
+
+            targetHeight = Math.max(0.7f, livingState.height);
+            targetWidth = Math.max(0.5f, livingState.width);
+        }
+
+        float scaleByH = (boxSize * 0.88f) / targetHeight;
+        float scaleByW = (boxSize * 0.88f) / targetWidth;
+        float scale = Math.max(1.0f, Math.min(scaleByH, scaleByW));
+
+        if (this.damagePulse > 0.001f) {
+            float bounce = 1.0f - 0.06f * (float)Math.sin(this.damagePulse * Math.PI);
+            scale *= bounce;
+        }
+
+        Quaternionf rotation = new Quaternionf().rotateZ((float)Math.PI);
+        Quaternionf transform = new Quaternionf().rotateX((float)Math.toRadians(-6.0f));
+        rotation.mul(transform);
+
+        Vector3f offset = new Vector3f(0.0f, targetHeight * 0.5f, 0.0f);
+
+        drawContext.addEntity(renderState, scale, offset, rotation, transform, left, top, right, bottom);
+    }
+
+    private void drawHeadForeground(DrawContext drawContext, LivingEntity livingEntity, float f, float f2, float f3, float f4, float f5, float f6) {
+        if (livingEntity == null || f6 <= 0.01f) {
+            return;
+        }
+
+        TargetHudModule module = TargetHudComp.hudModule();
+        boolean use3D = module == null || module.is3DAvatar();
+
+        if (use3D || !(livingEntity instanceof AbstractClientPlayerEntity)) {
+            this.drawTargetEntity3D(drawContext, livingEntity, f, f2, f3, f3, f6);
+            return;
+        }
+
         AbstractClientPlayerEntity abstractClientPlayerEntity = (AbstractClientPlayerEntity)livingEntity;
         Identifier identifier = abstractClientPlayerEntity.getSkin().body().texturePath();
         int n = Math.max(0, Math.min(255, Math.round(f6 * 255.0f))) << 24 | 0xFFFFFF;
-        n = TargetHudComp.tintHurt(n, livingEntity);
+        if (this.damagePulse > 0.01f) {
+            n = ColorUtil.lerpColor(n, 0xFFFF4466, this.damagePulse * 0.45f);
+        }
         String string = identifier.toString();
+        float radius = Math.min(f4, f3 * 0.5f);
         if (Render2D.imageReady(string)) {
-            Render2D.imageUvNearest(string, f, f2, f3, f5, f4, f4, f4, 0.5f, 0.125f, 0.125f, 0.25f, 0.25f, n);
+            Render2D.imageUvNearest(string, f, f2, f3, f5, radius, radius, radius, 0.5f, 0.125f, 0.125f, 0.25f, 0.25f, n);
             float f7 = 0.105932206f;
             float f8 = (0.125f - f7) * 0.5f;
-            Render2D.imageUvNearest(string, f, f2, f3, f5, f4, f4, f4, 0.5f, 0.625f + f8, 0.125f + f8, 0.75f - f8, 0.25f - f8, n);
+            Render2D.imageUvNearest(string, f, f2, f3, f5, radius, radius, radius, 0.5f, 0.625f + f8, 0.125f + f8, 0.75f - f8, 0.25f - f8, n);
         } else {
             drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, identifier, (int)f, (int)f2, 8.0f, 8.0f, (int)f3, (int)f3, 8, 8, 64, 64, n);
             drawContext.drawTexture(RenderPipelines.GUI_TEXTURED, identifier, (int)f, (int)f2, 40.0f, 8.0f, (int)f3, (int)f3, 8, 8, 64, 64, n);
@@ -525,8 +566,7 @@ extends Draggable {
         float f6 = 34.0f + f5;
         float f7 = this.getY() + 6.0f + f5 * 0.5f;
         float f8 = this.getX() + 6.0f + 11.0f;
-        float f9 = f7 + 11.0f;
-        this.updateHitParticles(this.target, f8, f9);
+        this.updateDamagePulse(this.target, f);
         Text text = TargetHudComp.resolveName(this.target);
         float f10 = Math.max(1.0f, this.target.getMaxHealth());
         float f11 = Network.getResolvedHealth(this.target, true);
@@ -569,10 +609,6 @@ extends Draggable {
         Render2D.msdfText(INFO_FONT, string, f22 - f14 * 0.5f, f28, 6.0f, ColorUtil.multAlpha(-3618608, f2));
         this.drawHeadBackground(drawContext, this.target, f16 + 6.0f + 1.0f, f7, 22.0f, 11.0f, 11.0f, f2, 0.0f);
         Render2D.flush();
-        Render2D.beginFrame(drawContext);
-        this.drawHitParticles(drawContext, f2);
-        Render2D.flush();
-        Render2D.beginFrame(drawContext);
         this.drawHeadForeground(drawContext, this.target, f16 + 6.0f + 1.0f, f7, 22.0f, 11.0f, 11.0f, f2);
         Render2D.flush();
         if (this.armorProgress > 0.02f) {
@@ -670,7 +706,7 @@ extends Draggable {
         if (interfaceModule != null && interfaceModule.rectCornerRadius.getFloat() > 6.0f) {
             f14 = Math.min(interfaceModule.rectCornerRadius.getFloat(), f12 * 0.5f);
         }
-        this.updateHitParticles(this.target, f10 + f12 * 0.5f, f11 + f12 * 0.5f);
+        this.updateDamagePulse(this.target, f);
         Text text = TargetHudComp.resolveName(this.target);
         float f15 = Math.max(1.0f, this.target.getMaxHealth());
         float f16 = Network.getResolvedHealth(this.target, true);
@@ -758,10 +794,6 @@ extends Draggable {
         }
         this.drawHeadBackground(drawContext, this.target, f10, f11, f12, f3, f14, f2, 1.0f * (1.0f - f7));
         Render2D.flush();
-        Render2D.beginFrame(drawContext);
-        this.drawHitParticles(drawContext, f2);
-        Render2D.flush();
-        Render2D.beginFrame(drawContext);
         this.drawHeadForeground(drawContext, this.target, f10, f11, f12, f3, f14, f2);
         Render2D.flush();
         float f56 = 0.5f * TargetHudComp.clamp01(f2);
@@ -792,21 +824,7 @@ extends Draggable {
         return Math.max(0.0f, Math.min(f2, f * 0.5f));
     }
 
-    private static int tintHurt(int n, LivingEntity livingEntity) {
-        int n2 = livingEntity.hurtTime;
-        if (n2 <= 0) {
-            return n;
-        }
-        float f = Math.min(1.0f, (float)n2 / 10.0f);
-        int n3 = n >>> 24;
-        int n4 = n >> 16 & 0xFF;
-        int n5 = n >> 8 & 0xFF;
-        int n6 = n & 0xFF;
-        n4 = Math.round((float)n4 + (float)(255 - n4) * f * 0.35f);
-        n5 = Math.round((float)n5 * (1.0f - f * 0.65f));
-        n6 = Math.round((float)n6 * (1.0f - f * 0.65f));
-        return n3 << 24 | TargetHudComp.clamp255(n4) << 16 | TargetHudComp.clamp255(n5) << 8 | TargetHudComp.clamp255(n6);
-    }
+
 
     private static TargetHudModule hudModule() {
         return ModuleManager.get().get(TargetHudModule.class);

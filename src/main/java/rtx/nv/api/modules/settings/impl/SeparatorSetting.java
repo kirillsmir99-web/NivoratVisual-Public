@@ -12,5 +12,9 @@ extends Setting {
         this.setVisibilityCondition(supplier);
         return this;
     }
+
+    public SeparatorSetting visibleWhen(Supplier<Boolean> supplier) {
+        return this.visible(supplier);
+    }
 }
 

@@ -25,6 +25,8 @@ public class MusicSubtitlesConfig {
     public String subtitlesAnimation = "KARAOKE_BOUNCE";
     public int subtitlesActiveColor = -10496;
     public boolean subtitlesGlow = true;
+    public float subtitlesGlowStrength = 0.85F;
+    public boolean speechRecognitionEnabled = false;
 
     public double sub2DPositionX = 0.5D;
     public double sub2DPositionY = 0.82D;
@@ -40,10 +42,36 @@ public class MusicSubtitlesConfig {
     public String yandexMusicToken = "";
 
     public void sync() {
+        rtx.nv.api.modules.impl.Interface.EvoPlayerModule evo = ModuleManager.get().get(rtx.nv.api.modules.impl.Interface.EvoPlayerModule.class);
+        if (evo != null && evo.isEnabled() && evo.worldLyrics.getValue()) {
+            this.subtitlesEnabled = true;
+            this.subtitlesMode = "WORLD_3D";
+            this.subtitlesScale = evo.size.getFloat();
+            this.subtitlesDistance = evo.distance.getFloat();
+            this.subtitlesOffsetMs = Math.round(evo.offset.getFloat());
+            this.sprintWordsEnabled = evo.roadside.getValue();
+            this.sprintWordsSpread = evo.scatter.getFloat();
+            this.sprintWordsDistance = evo.distance.getFloat();
+            this.subtitlesGlow = evo.glow.getValue();
+            this.subtitlesGlowStrength = evo.glowStrength.getFloat();
+            this.subtitlesTextShadow = evo.shadow.getValue();
+            this.subtitlesBgEnabled = evo.shadow.getValue();
+            this.speechRecognitionEnabled = evo.recognize.getValue();
+            this.subtitlesAnimation = "KARAOKE_BOUNCE";
+            this.subtitlesActiveColor = ThemeManager.accent(255.0F);
+
+            int hp = MusicHelperManager.get().getPort();
+            if (hp > 0) {
+                this.helperPort = hp;
+            }
+            return;
+        }
+
         MusicHudModule mod = ModuleManager.get().get(MusicHudModule.class);
         if (mod == null) {
             return;
         }
+
         this.subtitlesEnabled = mod.isEnabled() && mod.skyWords.getValue();
         this.subtitlesMode = switch (mod.wordsMode.getSelected()) {
             case "На экране · 2D" -> "HUD_BOTTOM";

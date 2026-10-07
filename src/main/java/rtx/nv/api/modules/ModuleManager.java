@@ -133,6 +133,7 @@ public final class ModuleManager {
             || clazz == KeyStrokesModule.class
             || clazz == CooldownsModule.class
             || clazz == HPFocus.class
+            || clazz == rtx.nv.api.modules.impl.Interface.EvoPlayerModule.class
             || clazz == WorldParticles.class;
     }
 
@@ -148,7 +149,7 @@ public final class ModuleManager {
     public void init() {
         if (this.initialized) return;
         this.initialized = true;
-        this.register(new HitSound(), new Ambience(), new BetterMinecraft(), new AspectRatio(), new ClickGui(), new CustomHotbar(), new CustomPet(), new FogBlur(), new HitBubbles(), new HpCounter(), new HitColor(), new Hitboxes(), new InterfaceModule(), new NotificationsModule(), new WatermarkModule(), new MusicHudModule(), new HotKeysModule(), new Profiler(), new TargetHudModule(), new PotionsModule(), new CooldownsModule(), new InfoModule(), new ArrayListModule(), new ArmorModule(), new InventoryModule(), new HPFocus(), new KeyStrokesModule(), new ScoreboardModule(), new ViewModel(), new Freelook(), new HandSwap(), new CameraSettings(), new ItemPhysics(), new JumpCircle(), new Crosshair(), new KillEffect(), new NameTags(), new GlowEsp(), new Crown(), new Wings(), new Cape(), new Emotions(), new BlockOverlay(), new FakePlayer(), new ShaderHands(), new ItemHighlight(), new NoRender(), new WorldParticles(), new HitParticles(), new ProjectileHelper(), new SwingAnimation(), new TargetESP(), new Trails(), new ShulkerPreview(),  new ClientSounds(), new DeathCoords(), new FastExp(), new TalTracker(), new ItemScroller(), new StreamerMode(), new TestSettings(), new AutoCommands(), new Optimization(), new Party(), new Globals(), new Discord());
+        this.register(new HitSound(), new Ambience(), new BetterMinecraft(), new AspectRatio(), new ClickGui(), new CustomHotbar(), new CustomPet(), new FogBlur(), new HitBubbles(), new HpCounter(), new HitColor(), new Hitboxes(), new InterfaceModule(), new NotificationsModule(), new WatermarkModule(), new MusicHudModule(), new rtx.nv.api.modules.impl.Interface.EvoPlayerModule(), new HotKeysModule(), new Profiler(), new TargetHudModule(), new PotionsModule(), new CooldownsModule(), new InfoModule(), new ArrayListModule(), new ArmorModule(), new InventoryModule(), new HPFocus(), new KeyStrokesModule(), new ScoreboardModule(), new ViewModel(), new Freelook(), new HandSwap(), new CameraSettings(), new ItemPhysics(), new JumpCircle(), new Crosshair(), new KillEffect(), new NameTags(), new GlowEsp(), new Crown(), new Wings(), new Cape(), new Emotions(), new BlockOverlay(), new FakePlayer(), new ShaderHands(), new ItemHighlight(), new NoRender(), new WorldParticles(), new HitParticles(), new ProjectileHelper(), new SwingAnimation(), new TargetESP(), new Trails(), new ShulkerPreview(),  new ClientSounds(), new DeathCoords(), new FastExp(), new TalTracker(), new ItemScroller(), new StreamerMode(), new TestSettings(), new AutoCommands(), new Optimization(), new Party(), new Globals(), new Discord());
         EventBus.get().subscribe(this);
     }
 

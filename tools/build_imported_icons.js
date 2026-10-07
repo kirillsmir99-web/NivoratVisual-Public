@@ -6,6 +6,7 @@ async function main() {
   const source=path.resolve('nivorat_nv_icons_pack/svg');
   const destination=path.resolve('build/svg_fixed');
   fs.mkdirSync(destination,{recursive:true});
+  fs.mkdirSync(path.resolve('src/main/resources/assets/nv/textures/icons'),{recursive:true});
   const cp=JSON.parse(fs.readFileSync('nivorat_nv_icons_pack/codepoints.json','utf8'));
   for(const name of Object.keys(cp)) {
     let svg=fs.readFileSync(path.join(source,name+'.svg'),'utf8').replace(/currentColor/g,'white');

@@ -80,6 +80,7 @@ public final class DragSystem {
         this.register(new ScoreboardComp());
         if (!rtx.nv.ClientEdition.isTrial()) {
             this.register(new MusicHudComp());
+            this.register(new rtx.nv.api.drags.components.EvoPlayerComp());
             this.register(new rtx.nv.api.drags.components.MusicSubtitlesComp());
         }
         new InfoHud();

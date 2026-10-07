@@ -55,12 +55,26 @@ public final class NvIcons {
     public static final String EDGE_FRINGE = rtx.nv.utils.render.fonts.NvIcons.EDGE_FRINGE;
     public static final String EDGE_WAVE = rtx.nv.utils.render.fonts.NvIcons.EDGE_WAVE;
 
+    public static final String REFRESH = rtx.nv.utils.render.fonts.NvIcons.REFRESH;
+    public static final String RESET = rtx.nv.utils.render.fonts.NvIcons.RESET;
+    public static final String RESTORE = rtx.nv.utils.render.fonts.NvIcons.RESTORE;
+    public static final String SAVE = rtx.nv.utils.render.fonts.NvIcons.SAVE;
+    public static final String CHEVRON_RIGHT = rtx.nv.utils.render.fonts.NvIcons.CHEVRON_RIGHT;
+    public static final String COPY = rtx.nv.utils.render.fonts.NvIcons.COPY;
+    public static final String FONT = rtx.nv.utils.render.fonts.NvIcons.FONT;
+    public static final String INFO = rtx.nv.utils.render.fonts.NvIcons.INFO;
+    public static final String KEYBIND = rtx.nv.utils.render.fonts.NvIcons.KEYBIND;
+    public static final String MAXIMIZE = rtx.nv.utils.render.fonts.NvIcons.MAXIMIZE;
+    public static final String PIN = rtx.nv.utils.render.fonts.NvIcons.PIN;
+    public static final String TRASH = rtx.nv.utils.render.fonts.NvIcons.TRASH;
+    public static final String WARNING = rtx.nv.utils.render.fonts.NvIcons.WARNING;
+
+    // Legacy Aliases
     public static final String WAVE_EDGE = rtx.nv.utils.render.fonts.NvIcons.WAVE_EDGE;
     public static final String LIVE_EDGE = EDGE_WAVE;
     public static final String GEAR = SETTINGS;
     public static final String ARROW_DOWN = CHEVRON_DOWN;
     public static final String KEYBOARD = BIND;
-    public static final String REFRESH = SPEED;
 
     public static String forCategory(Category category) {
         return rtx.nv.utils.render.fonts.NvIcons.forCategory(category);

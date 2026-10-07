@@ -11,7 +11,11 @@ public final class TargetHudModule extends InterfaceComponentModule {
     private static final String BAR_WHITE = "Белая";
     private static final String BAR_CLIENT = "Клиентский";
 
+    public static final String AVATAR_3D = "3D Модель";
+    public static final String AVATAR_HEAD = "Аватар";
+
     public final ModeSetting hudMode = this.register(new ModeSetting("Режим", "Внешний вид TargetHud: карточка или панель.", MODE_CARD, MODE_CARD, MODE_PANEL));
+    public final ModeSetting avatarMode = this.register(new ModeSetting("Вид цели", "Способ отображения цели: 3D Модель или аватар.", AVATAR_3D, AVATAR_3D, AVATAR_HEAD));
     public final ModeSetting barColorMode = this.register(new ModeSetting("Режим цвета полосы хп", "Цвет заливки полосы здоровья.", BAR_FROM_HP, BAR_FROM_HP, BAR_WHITE, BAR_CLIENT));
     public final BooleanSetting showArmor = this.register(new BooleanSetting("Броня", "Показывать броню и предметы в руках цели.", true));
     public final BooleanSetting followTarget = this.register(new BooleanSetting("Следовать", "HUD плавно следует за целью на экране и возвращается на своё место.", false));
@@ -26,6 +30,10 @@ public final class TargetHudModule extends InterfaceComponentModule {
 
     public boolean isPanelMode() {
         return this.hudMode.is(MODE_PANEL);
+    }
+
+    public boolean is3DAvatar() {
+        return this.avatarMode.is(AVATAR_3D);
     }
 
     public boolean isNewMode() {
